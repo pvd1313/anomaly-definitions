@@ -1,4 +1,5 @@
 ---@meta
+---@version 5.1
 
 local function is_value_global(value)
     if value:match("^%s+") then return false end
