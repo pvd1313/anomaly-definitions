@@ -613,6 +613,8 @@ MonsterSpace = {
     sound_script = 128,
 }
 
+---@alias coord_struct table<number,number,number>
+
 ---@class DLL_Pure
 ---@overload fun(): DLL_Pure
 DLL_Pure = {}
@@ -828,136 +830,239 @@ function matrix:setXYZi(number, number, number) end
 ---@field z any
 ---@overload fun(): vector
 vector = {}
----@param number number
-function vector:set_length(number) end
 
----@param number number
-function vector:sub(number) end
-
----@param vector vector
-function vector:sub(vector) end
-
-function vector:sub(vector, vector) end
-
-function vector:sub(vector, number) end
-
-function vector:reflect(vector, vector) end
-
-function vector:slide(vector, vector) end
-
----@param vector vector
-function vector:average(vector) end
-
-function vector:average(vector, vector) end
-
-function vector:normalize_safe() end
-
----@param vector vector
-function vector:normalize_safe(vector) end
-
-function vector:normalize() end
-
----@param vector vector
-function vector:normalize(vector) end
-
-function vector:align() end
-
-function vector:magnitude() end
-
-function vector:getP() end
-
----@param vector vector
-function vector:max(vector) end
-
-function vector:max(vector, vector) end
-
----@param vector vector
-function vector:distance_to_xz(vector) end
-
-function vector:invert() end
-
----@param vector vector
-function vector:invert(vector) end
-
-function vector:mad(vector, number) end
-
-function vector:mad(vector, vector, number) end
-
-function vector:mad(vector, vector) end
-
-function vector:mad(vector, vector, vector) end
-
----@param vector vector
-function vector:clamp(vector) end
-
-function vector:clamp(vector, vector) end
-
-function vector:inertion(vector, number) end
-
-function vector:crossproduct(vector, vector) end
-
+---@param x number
+---@param y number
+---@param z number
 ---@return vector
-function vector:set(number, number, number) end
+function vector:set(x, y, z) end
 
 ---@param vector vector
 ---@return vector
 function vector:set(vector) end
 
----@param vector vector
-function vector:abs(vector) end
-
 ---@param number number
+---@return vector
 function vector:div(number) end
 
 ---@param vector vector
+---@return vector
 function vector:div(vector) end
 
-function vector:div(vector, vector) end
-
-function vector:div(vector, number) end
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:div(vector1, vector2) end
 
 ---@param vector vector
+---@param number number
+---@return vector
+function vector:div(vector, number) end
+
+---@param number number
+function vector:add(number) end
+
+---@param vector vector
+---@return vector
+function vector:add(vector) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:add(vector1, vector2) end
+
+---@param vector vector
+---@param number number
+---@return vector
+function vector:add(vector, number) end
+
+---@param number number
+---@return vector
+function vector:sub(number) end
+
+---@param vector vector
+---@return vector
+function vector:sub(vector) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:sub(vector1, vector2) end
+
+---@param vector vector
+---@param number number
+---@return vector
+function vector:sub(vector, number) end
+
+---@param number number
+---@return vector
+function vector:set_length(number) end
+
+---@return vector
+function vector:normalize_safe() end
+
+---@param vector vector
+---@return vector
+function vector:normalize_safe(vector) end
+
+---@return vector
+function vector:normalize() end
+
+---@param vector vector
+---@return vector
+function vector:normalize(vector) end
+
+---@return vector
+function vector:align() end
+
+---@return number
+function vector:magnitude() end
+
+---@return number
+function vector:getP() end
+
+---@param vector vector
+---@return vector
+function vector:max(vector) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:max(vector1, vector2) end
+
+---@param vector vector
+---@return number
+function vector:distance_to_xz(vector) end
+
+---@param vector vector
+---@return vector
+function vector:invert(vector) end
+
+---@return vector
+function vector:invert() end
+
+---@param vector vector
+---@param number number
+---@return vector
+function vector:mad(vector, number) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@param number number
+---@return vector
+function vector:mad(vector1, vector2, number) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:mad(vector1, vector2) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@param vector3 vector
+---@return vector
+function vector:mad(vector1, vector2, vector3) end
+
+---@param vector vector
+---@return vector
+function vector:clamp(vector) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:clamp(vector1, vector2) end
+
+---@param vector vector
+---@param number number
+---@return vector
+function vector:inertion(vector, number) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:crossproduct(vector1, vector2) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:reflect(vector1, vector2) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:slide(vector1, vector2) end
+
+---@param vector vector
+---@return vector
+function vector:average(vector) end
+
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:average(vector1, vector2) end
+
+---@param vector vector
+---@return vector
+function vector:abs(vector) end
+
+---@param vector vector
+---@return number
 function vector:dotproduct(vector) end
 
 ---@return number
 function vector:getH() end
 
 ---@param vector vector
+---@return vector
 function vector:min(vector) end
 
-function vector:min(vector, vector) end
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:min(vector1, vector2) end
 
+---@param vector vector
+---@param number number
+---@return boolean
 function vector:similar(vector, number) end
 
 ---@param vector vector
+---@return number
 function vector:distance_to(vector) end
 
-function vector:lerp(vector, vector, number) end
+---@param vector1 vector
+---@param vector2 vector
+---@param number number
+---@return vector
+function vector:lerp(vector1, vector2, number) end
 
 ---@param vector vector
+---@return number
 function vector:distance_to_sqr(vector) end
 
 ---@param number number
+---@return vector
 function vector:mul(number) end
 
 ---@param vector vector
+---@return vector
 function vector:mul(vector) end
 
-function vector:mul(vector, vector) end
-
-function vector:mul(vector, number) end
-
-function vector:setHP(number, number) end
-
----@param number number
-function vector:add(number) end
+---@param vector1 vector
+---@param vector2 vector
+---@return vector
+function vector:mul(vector1, vector2) end
 
 ---@param vector vector
-function vector:add(vector) end
+---@param number number
+---@return vector
+function vector:mul(vector, number) end
 
-function vector:add(vector, vector) end
 
-function vector:add(vector, number) end
+---@param number1 number
+---@param number2 number
+---@return vector
+function vector:setHP(number1, number2) end
 
 ---@class vector2
 ---@overload fun(): vector2
@@ -965,8 +1070,11 @@ function vector:add(vector, number) end
 ---@field y any
 vector2 = {}
 
+
+---@param number1 number
+---@param number2 number
 ---@return vector2
-function vector2:set(number, number) end
+function vector2:set(number1, number2) end
 
 ---@param vector2 vector2
 ---@return vector2
@@ -1673,8 +1781,7 @@ game_object.watch = 1
 -- All types
 function game_object:id() end
 
-
----@return 
+---@return vector
 function game_object:position() end
 
 function game_object:level_vertex_id() end

@@ -19,6 +19,7 @@ function sound_object:set_position(vector) end
 
 function sound_object:stop_deffered() end
 
+---@return vector
 function sound_object:get_position() end
 
 function sound_object:stop() end

@@ -187,6 +187,7 @@ cpure_server_object = {}
 CALifeSmartTerrainTask = {}
 function CALifeSmartTerrainTask:level_vertex_id() end
 
+---@return vector
 function CALifeSmartTerrainTask:position() end
 
 function CALifeSmartTerrainTask:game_vertex_id() end
@@ -5039,5 +5040,5 @@ function cover_point:level_vertex_id() end
 ---@param cover_point cover_point
 function cover_point:is_smart_cover(cover_point) end
 
----@return vector vector
+---@return vector
 function cover_point:position() end

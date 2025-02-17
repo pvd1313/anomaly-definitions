@@ -1303,6 +1303,7 @@ function CHelicopter:StartFlame() end
 
 function CHelicopter:Visual() end
 
+---@return number
 function CHelicopter:GetDistanceToDestPosition() end
 
 function CHelicopter:GetHuntState() end
