@@ -28,7 +28,7 @@ function IRender_Visual:dcast_PKinematicsAnimated() end
 ---@field width any
 render_device = {}
 
----@return number
+---@return number u32_time device time
 function render_device:time_global() end
 
 ---@return number

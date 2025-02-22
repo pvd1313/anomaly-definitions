@@ -3,6 +3,7 @@
 
 function wnd() end
 
+---@return CInifile
 function game_ini() end
 
 ---@param number number
@@ -30,21 +31,25 @@ function bind_to_dik(bind) end
 
 function render_get_dx_level() end
 
----@param ini_file ini_file
+---@param CInifile CInifile
 ---@param string string
-function sell_condition(ini_file, string) end
+function sell_condition(CInifile, string) end
 
 ---@param number number
 ---@param number number
 function sell_condition(number, number) end
 
----@param ini_file ini_file
+---@param CInifile CInifile
 ---@param string string
-function buy_condition(ini_file, string) end
+function buy_condition(CInifile, string) end
 
 ---@param number number
 ---@param number number
 function buy_condition(number, number) end
+
+---@param fname string
+---@return CInifile
+function ini_file(fname) end
 
 ---@param string string
 function create_ini_file(string) end
@@ -63,6 +68,7 @@ function getFS() end
 ---@param string string
 function valid_saved_game(string) end
 
+---@return CConsole
 function get_console() end
 
 function app_ready() end
@@ -72,12 +78,13 @@ function IsDynamicMusic() end
 ---@param string string
 function log(string) end
 
----@param ini_file ini_file
+---@param CInifile CInifile
 ---@param string string
-function show_condition(ini_file, string) end
+function show_condition(CInifile, string) end
 
 function IsImportantSave() end
 
+---@return CInifile
 function system_ini() end
 
 -- Alundaio: Reloads system_ini. Can be done in-game
@@ -97,9 +104,11 @@ function bit_or(number, number) end
 ---@param string string
 function prefetch(string) end
 
+---@return number u32_time device time
 function time_global() end
 
 -- like time_global but not stopped when the game is paused (used for some UI screens)
+---@return number u32_time device time
 function time_continual() end
 
 function verify_if_thread_is_running() end

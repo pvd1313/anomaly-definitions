@@ -26,6 +26,7 @@ function level.vertex_id(vector) end
 ---@param number number
 ---@param vector vector
 ---@param number number
+---@return number
 function level.vertex_in_direction(number, vector, number) end
 
 ---@param number number
@@ -176,6 +177,7 @@ function level.stop_weather_fx() end
 function level.patrol_path_exists(string) end
 
 ---@param number number
+---@return vector
 function level.vertex_position(number) end
 
 ---@param boolean boolean

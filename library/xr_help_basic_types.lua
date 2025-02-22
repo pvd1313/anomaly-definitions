@@ -1,6 +1,7 @@
 ---@meta
 ---@version 5.1
 
+---@alias number integer
 
 ---@enum DIK_keys
 DIK_keys = {
@@ -1058,7 +1059,6 @@ function vector:mul(vector1, vector2) end
 ---@return vector
 function vector:mul(vector, number) end
 
-
 ---@param number1 number
 ---@param number2 number
 ---@return vector
@@ -1135,80 +1135,6 @@ duality = {}
 
 ---@return duality
 function duality:set(number, number) end
-
----@class ini_file
----@overload fun(fname: string): ini_file
-ini_file = {}
-
-
----@param section string
----@return number
-function ini_file:line_count(section) end
-
----@param section string
----@param key string
----@return boolean
-function ini_file:r_bool(section, key) end
-
----@param section string
----@return boolean
-function ini_file:section_exist(section) end
-
----@param section string
----@param key string
----@return number
-function ini_file:r_float(section, key) end
-
----@param section string
----@param key string
----@return clsid
-function ini_file:r_clsid(section, key) end
-
----@param section string
----@param key string
----@return number
-function ini_file:r_s32(section, key) end
-
----@param string section
----@param number line_number
----@param string internal_string_n
----@param string internal_string_v
----@return boolean, string, string
-function ini_file:r_line(string, number, string, string) end
-
----@param section string
----@param key string
----@param token_list token_list
----@return number
-function ini_file:r_token(section, key, token_list) end
-
----@param section string
----@param key string
----@return vector
-function ini_file:r_vector(section, key) end
-
----@param section string
----@param key string
----@return number
-function ini_file:r_u32(section, key) end
-
----@param section string
----@param key string
----@return string
-function ini_file:r_string_wq(section, key) end
-
----@param section string
----@param key string
----@return string
-function ini_file:r_string(section, key) end
-
----@param section string
----@param key string
----@return boolean
-function ini_file:line_exist(section, key) end
-
----@param functor fun(section: string): boolean? -- return true to exit iteration early
-function ini_file:section_for_each(functor) end
 
 ---@class Patch_Dawnload_Progress
 Patch_Dawnload_Progress = {}
@@ -1779,22 +1705,26 @@ game_object.watch = 1
 
 
 -- All types
+---@return number ID
 function game_object:id() end
 
 ---@return vector
 function game_object:position() end
 
+---@return number
 function game_object:level_vertex_id() end
 
+---@return number
 function game_object:game_vertex_id() end
 
 ---@return string
 function game_object:section() end
 
+---@return string
 function game_object:name() end
-
+---@return number
 function game_object:clsid() end
-
+---@return game_object|number
 function game_object:parent() end
 
 ---@param string string
@@ -2043,6 +1973,7 @@ function game_object:can_throw_grenades() end
 function game_object:can_throw_grenades(boolean) end
 
 -- items
+---@return number
 function game_object:active_slot() end
 
 function game_object:active_item() end
@@ -2171,14 +2102,14 @@ function game_object:item_deny_trade(game_object) end
 function game_object:set_trader_global_anim(string) end
 
 -- Trade profiles
-function game_object:buy_supplies(ini_file, string) end
+function game_object:buy_supplies(CInifile, string) end
 
 ---@param number number
 function game_object:buy_item_condition_factor(number) end
 
-function game_object:buy_condition(ini_file, string) end
+function game_object:buy_condition(CInifile, string) end
 
-function game_object:sell_condition(ini_file, string) end
+function game_object:sell_condition(CInifile, string) end
 
 ---@param number number
 function game_object:buy_item_exponent(number) end
@@ -2382,7 +2313,7 @@ function game_object:register_door_for_npc() end
 
 function game_object:get_script_name() end
 
----@return ini_file
+---@return CInifile
 function game_object:spawn_ini() end
 
 function game_object:get_campfire() end
@@ -2600,7 +2531,7 @@ function game_object:sound_prefix(string) end
 
 function game_object:set_task_state(enum_ETaskState, string) end
 
-function game_object:show_condition(ini_file, string) end
+function game_object:show_condition(CInifile, string) end
 
 function game_object:add_sound(string, number, enum_ESoundTypes, number, number, number) end
 
@@ -2670,7 +2601,9 @@ function game_object:get_current_holder() end
 function game_object:get_physics_shell() end
 
 ---@param vector vector
-function game_object:set_actor_position(vector) end
+---@param bskip_collision_correct ?boolean
+---@param bkeep_speed ?boolean
+function game_object:set_actor_position(vector, bskip_collision_correct, bkeep_speed) end
 
 function game_object:unregister_in_combat() end
 

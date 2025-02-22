@@ -1193,6 +1193,7 @@ function cse_alife_dynamic_object:on_before_register() end
 ---@param cse_abstract cse_abstract
 function cse_alife_dynamic_object:spawn_ini(cse_abstract) end
 
+---@return string
 function cse_alife_dynamic_object:section_name() end
 
 function cse_alife_dynamic_object:on_spawn() end
@@ -1452,7 +1453,7 @@ function cse_alife_human_abstract:on_register() end
 
 function cse_alife_human_abstract:reputation() end
 
-function cse_alife_human_abstract:force_set_goodwill(cse_alife_monster_abstract, number, number) end
+function cse_alife_human_abstract:force_set_goodwill(cse_alife_human_abstract, number, number) end
 
 function cse_alife_human_abstract:on_before_register() end
 

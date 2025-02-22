@@ -27,6 +27,9 @@ function OnSetText(uri, text)
 
     local file_name = uri:match("([%w_]+)%.%w+$")
     local eof = #text
+    if string.upper(file_name) == "_G" then
+        print(file_name)
+    end
 
     ---@param value string
     ---@param line number

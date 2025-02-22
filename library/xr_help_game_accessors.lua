@@ -8,15 +8,20 @@ game = {}
 ---@return string
 function game.translate_string(string) end
 
+---@return number u32_time CPU time
 function game.time() end
 
+---@return CTime xrTime ALIFE time
 function game.get_game_time() end
 
 ---@param string string
+---@return nil
 function game.start_tutorial(string) end
 
+---@return boolean is_tutorial_active
 function game.has_active_tutorial() end
 
+---@return nil
 function game.stop_tutorial() end
 
 -- REZY: clear all xml cache in engine
