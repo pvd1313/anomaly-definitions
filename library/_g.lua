@@ -1,5 +1,6 @@
 ---@meta
 ---@version 5.1
+---@package
 
 function start_game_callback() end
 
@@ -106,6 +107,9 @@ function abort(msg, ...) end
 -- stack trace logging
 function callstack(c1, to_str) end
 
+---@param typ number
+---@param name string
+---@return string|number|boolean
 function get_console_cmd(typ, name) end
 
 function exec_console_cmd(name) end
@@ -364,7 +368,7 @@ function vec_add(a, b) end
 function vec_set(vec) end
 
 ---Wrapper for grabbing server objects by id
----@param id integer
+---@param id number
 ---@return cse_alife_dynamic_object
 function alife_object(id) end
 
@@ -373,8 +377,9 @@ function alife_object(id) end
 ---@param pos vector
 ---@param lid number
 ---@param gid number
----@param id number
----@param state boolean Set false to spawn unregistered object
+---@param id ?number
+---@param state ?boolean Set false to spawn unregistered object
+---@return game_object?
 function alife_create(sec, pos, lid, gid, id, state) end
 
 ---- section: [string] (required)
@@ -413,7 +418,8 @@ function alife_create_item(section, obj, t) end
 function alife_process_item(section, id, t) end
 
 ---@param se_obj cse_alife_object
----@param msg string
+---@param msg ?string
+---@return boolean
 function alife_release(se_obj, msg) end
 
 ---@param id number
@@ -449,15 +455,14 @@ function get_actor_true_community() end
 -- no "actor_"
 function set_actor_true_community(new_comm, now) end
 
--- �������� ����� �������!!!!!
+
 function get_object_squad(object, caller) end
 
 function set_inactivate_input_time(delta) end
 
--- ��������� �� NPC �� ��������� ������
+
 function npc_in_actor_frustrum(npc) end
 
--- ������ team:squad:group �������.
 function change_team_squad_group(se_obj, team, squad, group) end
 
 function get_speaker(safe, all) end
@@ -479,9 +484,10 @@ function pstor_is_registered_type(tv) end
 
 ---@param obj game_object
 ---@param varname string
----@param val string|number|boolean|nil
+---@param val any
 function save_var(obj, varname, val) end
 
+---@return any
 function load_var(obj, varname, defval) end
 
 function save_ctime(obj, varname, val) end
@@ -496,13 +502,19 @@ function get_story_se_object(story_id) end
 
 function get_story_se_item(story_id) end
 
+---@param story_id string
+---@return game_object?
 function get_story_object(story_id) end
 
+---@param obj_id string
+---@return number?
 function get_object_story_id(obj_id) end
 
+---@param story_id string
+---@return number?
 function get_story_object_id(story_id) end
 
----@param story_id number
+---@param story_id string
 ---@return cse_alife_human_abstract
 function get_story_squad(story_id) end
 
@@ -549,10 +561,21 @@ function IsTestMode() end
 ---@return boolean
 function IsStoryPlayer() end
 
----@param o game_object|cse_alife_object
+---@param o? game_object|cse_alife_object
 ---@param c? clsid
 ---@return boolean
-function IsStalker(o, c) end
+function IsStalker(o,c)
+	if not (c) then
+		c = o and o:clsid()
+	end
+    local isStl = c and (c == clsid.script_stalker or c == clsid.script_actor or c == clsid.stalker or c == clsid.actor)
+    if isStl then
+        ---@cast o cse_alife_human_stalker
+        return isStl
+    else
+        return false
+    end
+end
 
 ---@param o game_object|cse_alife_object
 ---@param c? clsid
@@ -637,12 +660,12 @@ function IsShotgun(o, c) end
 ---@return boolean
 function IsRifle(o, c) end
 
----@param o game_object|cse_alife_object
+---@param o? game_object|cse_alife_object
 ---@param c? clsid
 ---@return boolean
 function IsWeapon(o, c) end
 
----@param o game_object|cse_alife_object
+---@param o? game_object|cse_alife_object
 ---@param c? clsid
 ---@return boolean
 function IsAmmo(o, c) end

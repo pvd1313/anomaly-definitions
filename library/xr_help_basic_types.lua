@@ -1,7 +1,7 @@
 ---@meta
 ---@version 5.1
 
----@alias number integer
+---@alias integer number
 
 ---@enum DIK_keys
 DIK_keys = {
@@ -1175,13 +1175,12 @@ reader = {}
 ---@param number number
 function reader:r_advance(number) end
 
----@param __int64 __int64
+---@param __int64 number
 function reader:r_u64(__int64) end
 
 function reader:r_u64() end
 
----@param reader reader
-function reader:r_bool(reader) end
+function reader:r_bool() end
 
 ---@param vector vector
 function reader:r_dir(vector) end
@@ -1210,7 +1209,7 @@ function reader:r_float_q16(number, number) end
 
 function reader:r_angle16() end
 
----@param __int64 __int64
+---@param __int64 number
 function reader:r_s64(__int64) end
 
 function reader:r_s64() end
@@ -1232,7 +1231,7 @@ function reader:r_sdir(vector) end
 
 function reader:r_tell() end
 
----@param char char
+---@param char string
 function reader:r_s8(char) end
 
 function reader:r_s8() end
@@ -1305,7 +1304,7 @@ function net_packet:r_float_q16(number, number, number) end
 ---@param number number
 function net_packet:r_angle16(number) end
 
----@param __int64 __int64
+---@param __int64 number
 function net_packet:r_s64(__int64) end
 
 function net_packet:r_s64() end
@@ -1325,7 +1324,7 @@ function net_packet:w_clientID(ClientID) end
 
 function net_packet:r_elapsed() end
 
----@param __int64 __int64
+---@param __int64 number
 function net_packet:r_u64(__int64) end
 
 function net_packet:r_u64() end
@@ -1359,7 +1358,7 @@ function net_packet:w_u16(number) end
 
 function net_packet:r_float_q8(number, number, number) end
 
----@param __int64 __int64
+---@param __int64 number
 function net_packet:w_s64(__int64) end
 
 ---@param net_packet net_packet
@@ -1378,7 +1377,7 @@ function net_packet:w_stringZ(string) end
 
 function net_packet:w_float_q16(number, number, number) end
 
----@param char char
+---@param char string
 function net_packet:r_s8(char) end
 
 function net_packet:r_s8() end
@@ -1415,7 +1414,7 @@ function net_packet:w_vec3(vector) end
 ---@param number number
 function net_packet:w_chunk_close16(number) end
 
----@param __int64 __int64
+---@param __int64 number
 function net_packet:w_u64(__int64) end
 
 ---@param number number
@@ -1592,8 +1591,8 @@ function object_factory:register(string, string, string) end
 
 ---@class object
 ---@overload fun(): object
--- object (game_object, enum_MonsterSpace__EObjectAction)
--- object (game_object, enum_MonsterSpace__EObjectAction, number)
+-- object (cse_abstract, enum_MonsterSpace__EObjectAction)
+-- object (cse_abstract, enum_MonsterSpace__EObjectAction, number)
 -- object (enum_MonsterSpace__EObjectAction)
 -- object (string, enum_MonsterSpace__EObjectAction)
 object = {}
@@ -1624,8 +1623,8 @@ function object:completed() end
 ---@param string string
 function object:object(string) end
 
----@param game_object game_object
-function object:object(game_object) end
+---@param cse_abstract cse_abstract
+function object:object(cse_abstract) end
 
 ---@param enum_MonsterSpace__EObjectAction enum_MonsterSpace__EObjectAction
 function object:action(enum_MonsterSpace__EObjectAction) end
@@ -1637,8 +1636,8 @@ object_params = {}
 
 
 ---@class object_binder
----@field object game_object
----@overload fun(game_object): object_binder
+---@field object cse_abstract
+---@overload fun(cse_abstract): object_binder
 object_binder = {}
 ---@param net_packet net_packet
 function object_binder:save(net_packet) end
@@ -1661,8 +1660,8 @@ function object_binder:net_destroy() end
 
 function object_binder:reinit() end
 
----@param game_object game_object
-function object_binder:net_Relcase(game_object) end
+---@param cse_abstract cse_abstract
+function object_binder:net_Relcase(cse_abstract) end
 
 ---@param cse_alife_object cse_alife_object
 function object_binder:net_spawn(cse_alife_object) end
@@ -1670,1426 +1669,1434 @@ function object_binder:net_spawn(cse_alife_object) end
 ---@param net_packet net_packet
 function object_binder:net_import(net_packet) end
 
----@class game_object
+---@class cse_abstract
 ---@field bleeding any
 ---@field health any
 ---@field morale any
 ---@field power any
 ---@field psy_health any
 ---@field radiation any
-game_object = {}
-game_object.action_type_count = 6
-game_object.alifeMovementTypeMask = 0
-game_object.alifeMovementTypeRandom = 1
-game_object.animation = 2
-game_object.dialog_pda_msg = 0
-game_object.dummy = -1
-game_object.enemy = 2
-game_object.friend = 0
-game_object.game_path = 0
-game_object.info_pda_msg = 1
-game_object.level_path = 1
-game_object.movement = 0
-game_object.neutral = 1
-game_object.no_path = 3
-game_object.no_pda_msg = 2
-game_object.object = 5
-game_object.particle = 4
-game_object.patrol_path = 2
-game_object.relation_attack = 1
-game_object.relation_fight_help_human = 2
-game_object.relation_fight_help_monster = 4
-game_object.relation_kill = 0
-game_object.sound = 3
-game_object.watch = 1
+cse_abstract = {}
+cse_abstract.action_type_count = 6
+cse_abstract.alifeMovementTypeMask = 0
+cse_abstract.alifeMovementTypeRandom = 1
+cse_abstract.animation = 2
+cse_abstract.dialog_pda_msg = 0
+cse_abstract.dummy = -1
+cse_abstract.enemy = 2
+cse_abstract.friend = 0
+cse_abstract.game_path = 0
+cse_abstract.info_pda_msg = 1
+cse_abstract.level_path = 1
+cse_abstract.movement = 0
+cse_abstract.neutral = 1
+cse_abstract.no_path = 3
+cse_abstract.no_pda_msg = 2
+cse_abstract.object = 5
+cse_abstract.particle = 4
+cse_abstract.patrol_path = 2
+cse_abstract.relation_attack = 1
+cse_abstract.relation_fight_help_human = 2
+cse_abstract.relation_fight_help_monster = 4
+cse_abstract.relation_kill = 0
+cse_abstract.sound = 3
+cse_abstract.watch = 1
 
 
 -- All types
 ---@return number ID
-function game_object:id() end
+function cse_abstract:id() end
 
 ---@return vector
-function game_object:position() end
+function cse_abstract:position() end
 
 ---@return number
-function game_object:level_vertex_id() end
+function cse_abstract:level_vertex_id() end
 
 ---@return number
-function game_object:game_vertex_id() end
+function cse_abstract:game_vertex_id() end
 
 ---@return string
-function game_object:section() end
+function cse_abstract:section() end
 
 ---@return string
-function game_object:name() end
+function cse_abstract:name() end
 ---@return number
-function game_object:clsid() end
----@return game_object|number
-function game_object:parent() end
+function cse_abstract:clsid() end
+---@return cse_abstract|number
+function cse_abstract:parent() end
 
 ---@param string string
-function game_object:has_info(string) end
+function cse_abstract:has_info(string) end
 
 ---@param string string
-function game_object:dont_has_info(string) end
+function cse_abstract:dont_has_info(string) end
 
 ---@param string string
-function game_object:give_info_portion(string) end
+function cse_abstract:give_info_portion(string) end
 
 ---@param string string
-function game_object:disable_info_portion(string) end
+function cse_abstract:disable_info_portion(string) end
+
+---@param dir vector 
+---@param value number
+---@param time_interval number
+function cse_abstract:set_const_force(dir, value, time_interval) end
 
 -- Testing
-function game_object:is_entity_alive() end
+function cse_abstract:is_entity_alive() end
 
-function game_object:is_inventory_item() end
+function cse_abstract:is_inventory_item() end
 
-function game_object:is_inventory_owner() end
+function cse_abstract:is_inventory_owner() end
 
-function game_object:is_actor() end
+function cse_abstract:is_actor() end
 
-function game_object:is_custom_monster() end
+function cse_abstract:is_custom_monster() end
 
-function game_object:is_weapon() end
+function cse_abstract:is_weapon() end
 
-function game_object:is_outfit() end
+function cse_abstract:is_outfit() end
 
-function game_object:is_scope() end
+function cse_abstract:is_scope() end
 
-function game_object:is_silencer() end
+function cse_abstract:is_silencer() end
 
-function game_object:is_grenade_launcher() end
+function cse_abstract:is_grenade_launcher() end
 
-function game_object:is_weapon_magazined() end
+function cse_abstract:is_weapon_magazined() end
 
-function game_object:is_space_restrictor() end
+function cse_abstract:is_space_restrictor() end
 
-function game_object:is_stalker() end
+function cse_abstract:is_stalker() end
 
-function game_object:is_anomaly() end
+function cse_abstract:is_anomaly() end
 
-function game_object:is_monster() end
+function cse_abstract:is_monster() end
 
-function game_object:is_trader() end
+function cse_abstract:is_trader() end
 
-function game_object:is_hud_item() end
+function cse_abstract:is_hud_item() end
 
-function game_object:is_artefact() end
+function cse_abstract:is_artefact() end
 
-function game_object:is_ammo() end
+function cse_abstract:is_ammo() end
 
-function game_object:is_weapon_gl() end
+function cse_abstract:is_weapon_gl() end
 
-function game_object:is_inventory_box() end
+function cse_abstract:is_inventory_box() end
 
 -- Player
-function game_object:get_actor_max_weight() end
+function cse_abstract:get_actor_max_weight() end
 
 ---@param number number
-function game_object:set_actor_max_weight(number) end
+function cse_abstract:set_actor_max_weight(number) end
 
-function game_object:get_actor_max_walk_weight() end
-
----@param number number
-function game_object:set_actor_max_walk_weight(number) end
-
-function game_object:get_actor_jump_speed() end
+function cse_abstract:get_actor_max_walk_weight() end
 
 ---@param number number
-function game_object:set_actor_jump_speed(number) end
+function cse_abstract:set_actor_max_walk_weight(number) end
 
-function game_object:get_actor_sprint_koef() end
-
----@param number number
-function game_object:set_actor_sprint_koef(number) end
-
-function game_object:get_actor_run_coef() end
+function cse_abstract:get_actor_jump_speed() end
 
 ---@param number number
-function game_object:set_actor_run_coef(number) end
+function cse_abstract:set_actor_jump_speed(number) end
 
-function game_object:get_actor_runback_coef() end
+function cse_abstract:get_actor_sprint_koef() end
 
 ---@param number number
-function game_object:set_actor_runback_coef(number) end
+function cse_abstract:set_actor_sprint_koef(number) end
+
+function cse_abstract:get_actor_run_coef() end
+
+---@param number number
+function cse_abstract:set_actor_run_coef(number) end
+
+function cse_abstract:get_actor_runback_coef() end
+
+---@param number number
+function cse_abstract:set_actor_runback_coef(number) end
 
 -- NPCs
-function game_object:rank() end
+function cse_abstract:rank() end
 
----@param game_object game_object
-function game_object:relation(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:relation(cse_abstract) end
 
----@param game_object game_object
-function game_object:goodwill(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:goodwill(cse_abstract) end
 
-function game_object:sympathy() end
+function cse_abstract:sympathy() end
 
-function game_object:set_relation(enum_ALife__ERelationType, game_object) end
+function cse_abstract:set_relation(enum_ALife__ERelationType, cse_abstract) end
 
-function game_object:set_community_goodwill(string, number) end
+function cse_abstract:set_community_goodwill(string, number) end
 
 ---@param number number
-function game_object:set_sympathy(number) end
+function cse_abstract:set_sympathy(number) end
 
----@param game_object game_object
-function game_object:general_goodwill(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:general_goodwill(cse_abstract) end
 
-function game_object:change_goodwill(number, game_object) end
+function cse_abstract:change_goodwill(number, cse_abstract) end
 
-function game_object:force_set_goodwill(number, game_object) end
+function cse_abstract:force_set_goodwill(number, cse_abstract) end
 
-function game_object:set_goodwill(number, game_object) end
+function cse_abstract:set_goodwill(number, cse_abstract) end
 
----@param game_object game_object
-function game_object:see(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:see(cse_abstract) end
 
 ---@param string string
-function game_object:see(string) end
+function cse_abstract:see(string) end
 
-function game_object:max_health() end
+function cse_abstract:max_health() end
 
-function game_object:alive() end
+function cse_abstract:alive() end
 
-function game_object:wounded() end
+function cse_abstract:wounded() end
 
 ---@param boolean boolean
-function game_object:wounded(boolean) end
+function cse_abstract:wounded(boolean) end
 
-function game_object:critically_wounded() end
+function cse_abstract:critically_wounded() end
 
----@param game_object game_object
-function game_object:kill(game_object) end
+---@param who game_object
+---@param bypass_actor_check? boolean
+function cse_abstract.kill(who, bypass_actor_check) end
 
-function game_object:best_danger() end
+function cse_abstract:best_danger() end
 
-function game_object:best_enemy() end
+function cse_abstract:best_enemy() end
 
-function game_object:get_enemy() end
+function cse_abstract:get_enemy() end
 
----@param game_object game_object
-function game_object:set_enemy(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:set_enemy(cse_abstract) end
 
-function game_object:mental_state() end
+function cse_abstract:mental_state() end
 
-function game_object:set_enemy_callback() end
+function cse_abstract:set_enemy_callback() end
 
 ---@param functor function
-function game_object:set_enemy_callback(functor) end
+function cse_abstract:set_enemy_callback(functor) end
 
-function game_object:set_enemy_callback(functor, object) end
+function cse_abstract:set_enemy_callback(functor, object) end
 
 -- returns bool
-function game_object:can_be_harmed() end
+function cse_abstract:can_be_harmed() end
 
 ---@param boolean boolean
-function game_object:set_can_be_harmed(boolean) end
+function cse_abstract:set_can_be_harmed(boolean) end
 
 -- Human objects
 -- some of these can be used for server objects as well
-function game_object:character_name() end
+function cse_abstract:character_name() end
 
-function game_object:character_icon() end
+function cse_abstract:character_icon() end
 
-function game_object:character_rank() end
+function cse_abstract:character_rank() end
 
-function game_object:character_reputation() end
+function cse_abstract:character_reputation() end
 
-function game_object:character_community() end
+function cse_abstract:character_community() end
 
 ---@param number number
-function game_object:set_character_rank(number) end
+function cse_abstract:set_character_rank(number) end
 
-function game_object:set_character_community(string, number, number) end
+function cse_abstract:set_character_community(string, number, number) end
 
 ---@param string string
-function game_object:set_character_icon(string) end
+function cse_abstract:set_character_icon(string) end
 
 ---@param number number
-function game_object:change_character_reputation(number) end
+function cse_abstract:change_character_reputation(number) end
 
 ---@param CGameTask CGameTask
-function game_object:set_active_task(CGameTask) end
+function cse_abstract:set_active_task(CGameTask) end
 
-function game_object:give_task(CGameTask, number, boolean, number) end
+function cse_abstract:give_task(CGameTask, number, boolean, number) end
 
 ---@param string string
-function game_object:get_task_state(string) end
+function cse_abstract:get_task_state(string) end
 
-function game_object:get_task(string, boolean) end
-
----@param number number
-function game_object:change_bleeding(number) end
+function cse_abstract:get_task(string, boolean) end
 
 ---@param number number
-function game_object:change_health(number) end
+function cse_abstract:change_bleeding(number) end
 
 ---@param number number
-function game_object:change_morale(number) end
+function cse_abstract:change_health(number) end
 
 ---@param number number
-function game_object:change_power(number) end
+function cse_abstract:change_morale(number) end
 
 ---@param number number
-function game_object:change_psy_health(number) end
+function cse_abstract:change_power(number) end
 
 ---@param number number
-function game_object:change_radiation(number) end
-
-function game_object:get_total_weight() end
-
----@param game_object game_object
-function game_object:memory_time(game_object) end
+function cse_abstract:change_psy_health(number) end
 
 ---@param number number
-function game_object:max_ignore_monster_distance(number) end
+function cse_abstract:change_radiation(number) end
 
-function game_object:max_ignore_monster_distance() end
+function cse_abstract:get_total_weight() end
 
-function game_object:money() end
+---@param cse_abstract cse_abstract
+function cse_abstract:memory_time(cse_abstract) end
 
 ---@param number number
-function game_object:give_money(number) end
+function cse_abstract:max_ignore_monster_distance(number) end
 
-function game_object:transfer_money(number, game_object) end
+function cse_abstract:max_ignore_monster_distance() end
 
-function game_object:enable_talk() end
+function cse_abstract:money() end
 
-function game_object:is_talk_enabled() end
+---@param number number
+function cse_abstract:give_money(number) end
 
-function game_object:disable_talk() end
+function cse_abstract:transfer_money(number, cse_abstract) end
 
-function game_object:switch_to_talk() end
+function cse_abstract:enable_talk() end
 
-function game_object:stop_talk() end
+function cse_abstract:is_talk_enabled() end
+
+function cse_abstract:disable_talk() end
+
+function cse_abstract:switch_to_talk() end
+
+function cse_abstract:stop_talk() end
 
 ---@param boolean boolean
-function game_object:allow_break_talk_dialog(boolean) end
+function cse_abstract:allow_break_talk_dialog(boolean) end
 
-function game_object:is_talking() end
+function cse_abstract:is_talking() end
 
-function game_object:can_throw_grenades() end
+function cse_abstract:can_throw_grenades() end
 
 ---@param boolean boolean
-function game_object:can_throw_grenades(boolean) end
+function cse_abstract:can_throw_grenades(boolean) end
 
 -- items
 ---@return number
-function game_object:active_slot() end
+function cse_abstract:active_slot() end
 
-function game_object:active_item() end
+function cse_abstract:active_item() end
 
-function game_object:active_detector() end
+function cse_abstract:active_detector() end
 
-function game_object:show_detector() end
+function cse_abstract:show_detector() end
 
-function game_object:hide_detector() end
+function cse_abstract:hide_detector() end
 
 --  useful for item animations and grenade quickthrow
-function game_object:force_hide_detector() end
+function cse_abstract:force_hide_detector() end
 
 ---@param number number
-function game_object:activate_slot(number) end
+function cse_abstract:activate_slot(number) end
 
 ---@param number number
-function game_object:item_in_slot(number) end
+function cse_abstract:item_in_slot(number) end
 
 ---@param number number
-function game_object:item_on_belt(number) end
+function cse_abstract:item_on_belt(number) end
 
----@param game_object game_object
-function game_object:is_on_belt(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:is_on_belt(cse_abstract) end
 
-function game_object:belt_count() end
+function cse_abstract:belt_count() end
 
----@param game_object game_object
-function game_object:move_to_ruck(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:move_to_ruck(cse_abstract) end
 
-function game_object:move_to_slot(game_object, number) end
+function cse_abstract:move_to_slot(cse_abstract, number) end
 
----@param game_object game_object
-function game_object:move_to_belt(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:move_to_belt(cse_abstract) end
 
----@param game_object game_object
-function game_object:eat(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:eat(cse_abstract) end
 
-function game_object:best_item() end
+function cse_abstract:best_item() end
 
-function game_object:best_weapon() end
+function cse_abstract:best_weapon() end
 
-function game_object:get_artefact() end
+function cse_abstract:get_artefact() end
 
----@param game_object game_object
-function game_object:drop_item(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:drop_item(cse_abstract) end
 
-function game_object:drop_item_and_teleport(game_object, vector) end
+function cse_abstract:drop_item_and_teleport(cse_abstract, vector) end
 
 -- force to slot
----@param game_object game_object
-function game_object:make_item_active(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:make_item_active(cse_abstract) end
 
 ---@param boolean boolean
-function game_object:take_items_enabled(boolean) end
+function cse_abstract:take_items_enabled(boolean) end
 
-function game_object:take_items_enabled() end
+function cse_abstract:take_items_enabled() end
 
-function game_object:is_there_items_to_pickup() end
+function cse_abstract:is_there_items_to_pickup() end
 
----@param game_object game_object
-function game_object:mark_item_dropped(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:mark_item_dropped(cse_abstract) end
 
-function game_object:get_inv_weight() end
+function cse_abstract:get_inv_weight() end
 
-function game_object:get_inv_max_weight() end
+function cse_abstract:get_inv_max_weight() end
 
-function game_object:can_select_weapon() end
+function cse_abstract:can_select_weapon() end
 
 ---@param boolean boolean
-function game_object:can_select_weapon(boolean) end
+function cse_abstract:can_select_weapon(boolean) end
 
-function game_object:weapon_strapped() end
+function cse_abstract:weapon_strapped() end
 
-function game_object:weapon_unstrapped() end
+function cse_abstract:weapon_unstrapped() end
 
 -- for db.actor only, must comes after unload magazine cause it doesn't work with full mag
-function game_object:reload_weapon() end
+function cse_abstract:reload_weapon() end
 
-function game_object:hide_weapon() end
+function cse_abstract:hide_weapon() end
 
-function game_object:get_current_outfit() end
+function cse_abstract:get_current_outfit() end
 
 ---@param number number
-function game_object:get_current_outfit_protection(number) end
+function cse_abstract:get_current_outfit_protection(number) end
 
 ---@param enum_MonsterSpace__EObjectAction enum_MonsterSpace__EObjectAction
-function game_object:set_item(enum_MonsterSpace__EObjectAction) end
+function cse_abstract:set_item(enum_MonsterSpace__EObjectAction) end
 
-function game_object:set_item(enum_MonsterSpace__EObjectAction, game_object) end
+function cse_abstract:set_item(enum_MonsterSpace__EObjectAction, cse_abstract) end
 
-function game_object:set_item(enum_MonsterSpace__EObjectAction, game_object, number) end
+function cse_abstract:set_item(enum_MonsterSpace__EObjectAction, cse_abstract, number) end
 
-function game_object:set_item(enum_MonsterSpace__EObjectAction, game_object, number, number) end
+function cse_abstract:set_item(enum_MonsterSpace__EObjectAction, cse_abstract, number, number) end
 
-function game_object:iterate_inventory(functor, object) end
+function cse_abstract:iterate_inventory(functor, object) end
 
-function game_object:iterate_ruck(functor, object) end
+function cse_abstract:iterate_ruck(functor, object) end
 
-function game_object:iterate_belt(functor, object) end
+function cse_abstract:iterate_belt(functor, object) end
 
 ---@param functor function
-function game_object:inventory_for_each(functor) end
+function cse_abstract:inventory_for_each(functor) end
 
-function game_object:transfer_item(game_object, game_object) end
+function cse_abstract:transfer_item(cse_abstract, cse_abstract) end
 
-function game_object:is_trade_enabled() end
+function cse_abstract:is_trade_enabled() end
 
-function game_object:switch_to_trade() end
+function cse_abstract:switch_to_trade() end
 
-function game_object:enable_trade() end
+function cse_abstract:enable_trade() end
 
-function game_object:disable_trade() end
+function cse_abstract:disable_trade() end
 
-function game_object:buy_condition(number, number) end
+function cse_abstract:buy_condition(number, number) end
 
-function game_object:sell_condition(number, number) end
+function cse_abstract:sell_condition(number, number) end
 
----@param game_object game_object
-function game_object:item_allow_trade(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:item_allow_trade(cse_abstract) end
 
----@param game_object game_object
-function game_object:item_deny_trade(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:item_deny_trade(cse_abstract) end
 
 ---@param string string
-function game_object:set_trader_global_anim(string) end
+function cse_abstract:set_trader_global_anim(string) end
 
 -- Trade profiles
-function game_object:buy_supplies(CInifile, string) end
+function cse_abstract:buy_supplies(CInifile, string) end
 
 ---@param number number
-function game_object:buy_item_condition_factor(number) end
+function cse_abstract:buy_item_condition_factor(number) end
 
-function game_object:buy_condition(CInifile, string) end
+function cse_abstract:buy_condition(CInifile, string) end
 
-function game_object:sell_condition(CInifile, string) end
-
----@param number number
-function game_object:buy_item_exponent(number) end
+function cse_abstract:sell_condition(CInifile, string) end
 
 ---@param number number
-function game_object:sell_item_exponent(number) end
+function cse_abstract:buy_item_exponent(number) end
 
-function game_object:add_animation(string, boolean, boolean) end
+---@param number number
+function cse_abstract:sell_item_exponent(number) end
 
-function game_object:add_animation(string, boolean, vector, vector, boolean) end
+function cse_abstract:add_animation(string, boolean, boolean) end
 
-function game_object:get_script() end
+function cse_abstract:add_animation(string, boolean, vector, vector, boolean) end
+
+function cse_abstract:get_script() end
 
 ---@param boolean boolean
-function game_object:enable_night_vision(boolean) end
+function cse_abstract:enable_night_vision(boolean) end
 
-function game_object:sound_voice_prefix() end
+function cse_abstract:sound_voice_prefix() end
 
-function game_object:use_smart_covers_only() end
+function cse_abstract:use_smart_covers_only() end
 
 ---@param boolean boolean
-function game_object:use_smart_covers_only(boolean) end
+function cse_abstract:use_smart_covers_only(boolean) end
 
 ---@param string string
-function game_object:external_sound_start(string) end
+function cse_abstract:external_sound_start(string) end
 
-function game_object:get_dest_smart_cover_name() end
+function cse_abstract:get_dest_smart_cover_name() end
 
-function game_object:memory_visible_objects() end
+function cse_abstract:memory_visible_objects() end
 
-function game_object:who_hit_name() end
+function cse_abstract:who_hit_name() end
 
 ---@param number number
-function game_object:lookout_max_time(number) end
+function cse_abstract:lookout_max_time(number) end
 
-function game_object:lookout_max_time() end
+function cse_abstract:lookout_max_time() end
 
-function game_object:in_current_loophole_fov(vector) end
+function cse_abstract:in_current_loophole_fov(vector) end
 
-function game_object:clear_animations() end
+function cse_abstract:clear_animations() end
 
 ---@param boolean boolean
-function game_object:set_smart_cover_target_default(boolean) end
+function cse_abstract:set_smart_cover_target_default(boolean) end
 
 ---@return CPhysicObject
-function game_object:get_physics_object() end
+function cse_abstract:get_physics_object() end
 
 ---@param number number
-function game_object:idle_max_time(number) end
+function cse_abstract:idle_max_time(number) end
 
-function game_object:idle_max_time() end
+function cse_abstract:idle_max_time() end
 
-function game_object:base_out_restrictions() end
+function cse_abstract:base_out_restrictions() end
 
-function game_object:iterate_inventory_box(functor, object) end
+function cse_abstract:iterate_inventory_box(functor, object) end
 
 ---@param functor function
-function game_object:set_smart_cover_target_selector(functor) end
+function cse_abstract:set_smart_cover_target_selector(functor) end
 
-function game_object:set_smart_cover_target_selector(functor, object) end
+function cse_abstract:set_smart_cover_target_selector(functor, object) end
 
-function game_object:set_smart_cover_target_selector() end
+function cse_abstract:set_smart_cover_target_selector() end
 
 ---@param action_planner action_planner
-function game_object:debug_planner(action_planner) end
+function cse_abstract:debug_planner(action_planner) end
 
-function game_object:who_hit_section_name() end
-
----@param number number
-function game_object:set_previous_point(number) end
-
-function game_object:set_smart_cover_target_fire() end
-
-function game_object:team() end
-
-function game_object:get_smart_cover_description() end
+function cse_abstract:who_hit_section_name() end
 
 ---@param number number
-function game_object:active_zone_contact(number) end
+function cse_abstract:set_previous_point(number) end
 
-function game_object:set_smart_cover_target_lookout() end
+function cse_abstract:set_smart_cover_target_fire() end
 
-function game_object:action_count() end
+function cse_abstract:team() end
+
+function cse_abstract:get_smart_cover_description() end
+
+---@param number number
+function cse_abstract:active_zone_contact(number) end
+
+function cse_abstract:set_smart_cover_target_lookout() end
+
+function cse_abstract:action_count() end
 
 ---@param string string
-function game_object:set_dest_smart_cover(string) end
+function cse_abstract:set_dest_smart_cover(string) end
 
-function game_object:set_dest_smart_cover() end
+function cse_abstract:set_dest_smart_cover() end
 
-function game_object:get_dest_smart_cover() end
+function cse_abstract:get_dest_smart_cover() end
 
-function game_object:restore_sound_threshold() end
+function cse_abstract:restore_sound_threshold() end
 
-function game_object:object_count() end
+function cse_abstract:object_count() end
 
-function game_object:animation_slot() end
+function cse_abstract:animation_slot() end
 
-function game_object:get_current_direction() end
+function cse_abstract:get_current_direction() end
 
-function game_object:action() end
+function cse_abstract:action() end
 
-function game_object:give_talk_message(string, string, string) end
+function cse_abstract:give_talk_message(string, string, string) end
 
-function game_object:not_yet_visible_objects() end
+function cse_abstract:not_yet_visible_objects() end
 
 ---@param enum_MonsterSpace__EMentalState enum_MonsterSpace__EMentalState
-function game_object:set_mental_state(enum_MonsterSpace__EMentalState) end
+function cse_abstract:set_mental_state(enum_MonsterSpace__EMentalState) end
 
-function game_object:squad() end
+function cse_abstract:squad() end
 
-function game_object:reset_action_queue() end
+function cse_abstract:reset_action_queue() end
 
 ---@param boolean boolean
-function game_object:burer_set_force_gravi_attack(boolean) end
+function cse_abstract:burer_set_force_gravi_attack(boolean) end
 
 ---@param number number
-function game_object:set_actor_direction(number) end
+function cse_abstract:set_actor_direction(number) end
 
-function game_object:add_restrictions(string, string) end
+function cse_abstract:add_restrictions(string, string) end
 
-function game_object:get_monster_hit_info() end
+function cse_abstract:get_monster_hit_info() end
 
-function game_object:memory_hit_objects() end
+function cse_abstract:memory_hit_objects() end
 
 ---@param object_binder object_binder
-function game_object:bind_object(object_binder) end
+function cse_abstract:bind_object(object_binder) end
 
-function game_object:get_bone_id(string) end
+function cse_abstract:get_bone_id(string) end
 
-function game_object:binded_object() end
+function cse_abstract:binded_object() end
 
-function game_object:path_completed() end
+function cse_abstract:path_completed() end
 
-function game_object:release_stand_sleep_animation() end
+function cse_abstract:release_stand_sleep_animation() end
 
-function game_object:set_fastcall(functor, object) end
+function cse_abstract:set_fastcall(functor, object) end
 
 ---@param vector vector
-function game_object:set_smart_cover_target(vector) end
+function cse_abstract:set_smart_cover_target(vector) end
 
----@param game_object game_object
-function game_object:set_smart_cover_target(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:set_smart_cover_target(cse_abstract) end
 
-function game_object:set_smart_cover_target() end
-
----@param number number
-function game_object:set_start_point(number) end
+function cse_abstract:set_smart_cover_target() end
 
 ---@param number number
-function game_object:set_fov(number) end
+function cse_abstract:set_start_point(number) end
+
+---@param number number
+function cse_abstract:set_fov(number) end
 
 ---@param enum_MovementManager__EPathType enum_MovementManager__EPathType
-function game_object:set_path_type(enum_MovementManager__EPathType) end
+function cse_abstract:set_path_type(enum_MovementManager__EPathType) end
 
-function game_object:restore_max_ignore_monster_distance() end
+function cse_abstract:restore_max_ignore_monster_distance() end
 
 ---@param boolean boolean
-function game_object:set_collision_off(boolean) end
+function cse_abstract:set_collision_off(boolean) end
 
-function game_object:enable_memory_object(game_object, boolean) end
+function cse_abstract:enable_memory_object(cse_abstract, boolean) end
 
 ---@param number number
-function game_object:lookout_min_time(number) end
+function cse_abstract:lookout_min_time(number) end
 
-function game_object:lookout_min_time() end
+function cse_abstract:lookout_min_time() end
 
-function game_object:animation_count() end
+function cse_abstract:animation_count() end
 
-function game_object:disable_inv_upgrade() end
+function cse_abstract:disable_inv_upgrade() end
 
-function game_object:memory_sound_objects() end
+function cse_abstract:memory_sound_objects() end
 
 ---@return hanging_lamp
-function game_object:get_hanging_lamp() end
+function cse_abstract:get_hanging_lamp() end
 
-function game_object:get_force_anti_aim() end
+function cse_abstract:get_force_anti_aim() end
 
-function game_object:enable_inv_upgrade() end
+function cse_abstract:enable_inv_upgrade() end
 
-function game_object:set_smart_cover_target_idle() end
+function cse_abstract:set_smart_cover_target_idle() end
 
-function game_object:invulnerable() end
-
----@param boolean boolean
-function game_object:invulnerable(boolean) end
-
-function game_object:movement_type() end
-
----@param number number
-function game_object:explode(number) end
-
-function game_object:remove_home() end
-
----@param number number
-function game_object:set_dest_level_vertex_id(number) end
+function cse_abstract:invulnerable() end
 
 ---@param boolean boolean
-function game_object:deadbody_closed(boolean) end
+function cse_abstract:invulnerable(boolean) end
 
-function game_object:register_door_for_npc() end
+function cse_abstract:movement_type() end
 
-function game_object:get_script_name() end
+---@param number number
+function cse_abstract:explode(number) end
+
+function cse_abstract:remove_home() end
+
+---@param number number
+function cse_abstract:set_dest_level_vertex_id(number) end
+
+---@param boolean boolean
+function cse_abstract:deadbody_closed(boolean) end
+
+function cse_abstract:register_door_for_npc() end
+
+function cse_abstract:get_script_name() end
 
 ---@return CInifile
-function game_object:spawn_ini() end
+function cse_abstract:spawn_ini() end
 
-function game_object:get_campfire() end
+function cse_abstract:get_campfire() end
 
-function game_object:get_movement_speed() end
+function cse_abstract:get_movement_speed() end
 
 ---@param enum_MonsterSpace__EBodyState enum_MonsterSpace__EBodyState
-function game_object:set_body_state(enum_MonsterSpace__EBodyState) end
+function cse_abstract:set_body_state(enum_MonsterSpace__EBodyState) end
 
-function game_object:in_loophole_fov(string, string, vector) end
+function cse_abstract:in_loophole_fov(string, string, vector) end
 
 ---@param boolean boolean
-function game_object:set_invisible(boolean) end
+function cse_abstract:set_invisible(boolean) end
 
-function game_object:in_smart_cover() end
+function cse_abstract:in_smart_cover() end
 
 ---@param number number
-function game_object:play_sound(number) end
+function cse_abstract:play_sound(number) end
 
-function game_object:play_sound(number, number) end
+function cse_abstract:play_sound(number, number) end
 
-function game_object:play_sound(number, number, number) end
+function cse_abstract:play_sound(number, number, number) end
 
-function game_object:play_sound(number, number, number, number) end
+function cse_abstract:play_sound(number, number, number, number) end
 
-function game_object:play_sound(number, number, number, number, number) end
+function cse_abstract:play_sound(number, number, number, number, number) end
 
-function game_object:play_sound(number, number, number, number, number, number) end
+function cse_abstract:play_sound(number, number, number, number, number, number) end
 
-function game_object:get_visual_name() end
+function cse_abstract:get_visual_name() end
 
 ---@param enum_ESelectionType enum_ESelectionType
-function game_object:set_movement_selection_type(enum_ESelectionType) end
+function cse_abstract:set_movement_selection_type(enum_ESelectionType) end
 
-function game_object:disable_anomaly() end
+function cse_abstract:disable_anomaly() end
 
----@param game_object game_object
-function game_object:motivation_action_manager(game_object) end
+---@param self self
+function cse_abstract:motivation_action_manager() end
 
-function game_object:bone_position(string) end
+function cse_abstract:bone_position(string) end
 
 ---@param string string
-function game_object:object(string) end
+function cse_abstract:object(string) end
 
 ---@param number number
-function game_object:object(number) end
+function cse_abstract:object(number) end
 
 -- get game object of specified ID that belongs to an owner, return 0 if not found?
 ---@param number number
-function game_object:object_id(number) end
+function cse_abstract:object_id(number) end
 
-function game_object:fov() end
+function cse_abstract:fov() end
 
-function game_object:set_default_panic_threshold() end
+function cse_abstract:set_default_panic_threshold() end
 
 ---@param flags32 flags32
-function game_object:set_actor_relation_flags(flags32) end
+function cse_abstract:set_actor_relation_flags(flags32) end
 
-function game_object:lock_door_for_npc() end
+function cse_abstract:lock_door_for_npc() end
 
-function game_object:is_body_turning() end
-
----@param number number
-function game_object:set_dest_game_vertex_id(number) end
-
----@param game_object game_object
-function game_object:marked_dropped(game_object) end
-
-function game_object:patrol_path_make_inactual() end
-
-function game_object:fake_death_stand_up() end
+function cse_abstract:is_body_turning() end
 
 ---@param number number
-function game_object:remove_sound(number) end
+function cse_abstract:set_dest_game_vertex_id(number) end
+
+---@param cse_abstract cse_abstract
+function cse_abstract:marked_dropped(cse_abstract) end
+
+function cse_abstract:patrol_path_make_inactual() end
+
+function cse_abstract:fake_death_stand_up() end
+
+---@param number number
+function cse_abstract:remove_sound(number) end
 
 ---@param enum_DetailPathManager__EDetailPathType enum_DetailPathManager__EDetailPathType
-function game_object:set_detail_path_type(enum_DetailPathManager__EDetailPathType) end
+function cse_abstract:set_detail_path_type(enum_DetailPathManager__EDetailPathType) end
 
-function game_object:extrapolate_length() end
+function cse_abstract:extrapolate_length() end
 
 ---@param number number
-function game_object:extrapolate_length(number) end
+function cse_abstract:extrapolate_length(number) end
 
 ---@param boolean boolean
-function game_object:death_sound_enabled(boolean) end
+function cse_abstract:death_sound_enabled(boolean) end
 
-function game_object:death_sound_enabled() end
+function cse_abstract:death_sound_enabled() end
 
 ---@param string string Name of the animation to be played
-function game_object:play_cycle(string) end
+function cse_abstract:play_cycle(string) end
 
 ---@param string string Name of the animation to be played
 ---@param boolean boolean mixin
-function game_object:play_cycle(string, boolean) end
+function cse_abstract:play_cycle(string, boolean) end
 
-function game_object:set_capture_anim(game_object, string, vector, number) end
+function cse_abstract:set_capture_anim(cse_abstract, string, vector, number) end
 
-function game_object:patrol() end
+function cse_abstract:patrol() end
 
-function game_object:story_id() end
+function cse_abstract:story_id() end
 
-function game_object:in_restrictions() end
+function cse_abstract:in_restrictions() end
 
-function game_object:unlock_door_for_npc() end
+function cse_abstract:unlock_door_for_npc() end
 
-function game_object:visibility_threshold() end
-
----@param boolean boolean
-function game_object:sniper_update_rate(boolean) end
-
-function game_object:sniper_update_rate() end
-
-function game_object:get_current_point_index() end
-
-function game_object:stop_particles(string, string) end
+function cse_abstract:visibility_threshold() end
 
 ---@param boolean boolean
-function game_object:set_alien_control(boolean) end
+function cse_abstract:sniper_update_rate(boolean) end
+
+function cse_abstract:sniper_update_rate() end
+
+function cse_abstract:get_current_point_index() end
+
+function cse_abstract:stop_particles(string, string) end
 
 ---@param boolean boolean
-function game_object:inv_box_can_take(boolean) end
+function cse_abstract:set_alien_control(boolean) end
 
-function game_object:set_patrol_path(string, enum_PatrolPathManager__EPatrolStartType,
+---@param boolean boolean
+function cse_abstract:inv_box_can_take(boolean) end
+
+function cse_abstract:set_patrol_path(string, enum_PatrolPathManager__EPatrolStartType,
                                      enum_PatrolPathManager__EPatrolRouteType, boolean)
 end
 
 ---@param boolean boolean
-function game_object:allow_sprint(boolean) end
+function cse_abstract:allow_sprint(boolean) end
 
 ---@param boolean boolean
-function game_object:special_danger_move(boolean) end
+function cse_abstract:special_danger_move(boolean) end
 
-function game_object:special_danger_move() end
+function cse_abstract:special_danger_move() end
 
-function game_object:is_level_changer_enabled() end
+function cse_abstract:is_level_changer_enabled() end
 
 ---@param boolean boolean
-function game_object:enable_level_changer(boolean) end
+function cse_abstract:enable_level_changer(boolean) end
 
 ---@param vector vector
-function game_object:actor_look_at_point(vector) end
+function cse_abstract:actor_look_at_point(vector) end
 
-function game_object:set__force(vector, number, number) end
+function cse_abstract:set__force(vector, number, number) end
 
 ---@param string string
-function game_object:aim_bone_id(string) end
+function cse_abstract:aim_bone_id(string) end
 
-function game_object:aim_bone_id() end
+function cse_abstract:aim_bone_id() end
 
-function game_object:restore_default_start_dialog() end
+function cse_abstract:restore_default_start_dialog() end
 
-function game_object:change_team(number, number, number) end
+function cse_abstract:change_team(number, number, number) end
 
-function game_object:set_trader_sound(string, string) end
+function cse_abstract:set_trader_sound(string, string) end
 
-function game_object:aim_time(game_object, number) end
+function cse_abstract:aim_time(cse_abstract, number) end
 
----@param game_object game_object
-function game_object:aim_time(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:aim_time(cse_abstract) end
 
----Gives a positional vector pointing in the direction of game_object's orientation
+---Gives a positional vector pointing in the direction of cse_abstract's orientation
 ---@return vector
-function game_object:direction() end
+function cse_abstract:direction() end
 
-function game_object:body_state() end
+function cse_abstract:body_state() end
 
 ---@param boolean boolean
-function game_object:skip_transfer_enemy(boolean) end
+function cse_abstract:skip_transfer_enemy(boolean) end
 
 ---@param number number
-function game_object:idle_min_time(number) end
+function cse_abstract:idle_min_time(number) end
 
-function game_object:idle_min_time() end
-
----@param string string
-function game_object:info_add(string) end
-
-function game_object:sight_params() end
-
-function game_object:set_sight(enum_SightManager__ESightType, vector, number) end
-
-function game_object:set_sight(enum_SightManager__ESightType, boolean, boolean) end
-
-function game_object:set_sight(enum_SightManager__ESightType, vector, boolean) end
-
-function game_object:set_sight(enum_SightManager__ESightType, vector) end
-
----@param game_object game_object
-function game_object:set_sight(game_object) end
-
-function game_object:set_sight(game_object, boolean) end
-
-function game_object:set_sight(game_object, boolean, boolean) end
-
-function game_object:set_sight(game_object, boolean, boolean, boolean) end
-
----@param boolean boolean
-function game_object:set_visual_memory_enabled(boolean) end
-
-function game_object:remove_restrictions(string, string) end
-
-function game_object:get_holder_class() end
-
----@param boolean boolean
-function game_object:disable_hit_marks(boolean) end
-
-function game_object:disable_hit_marks() end
-
-function game_object:location_on_path(number, vector) end
-
-function game_object:sound_prefix() end
+function cse_abstract:idle_min_time() end
 
 ---@param string string
-function game_object:sound_prefix(string) end
+function cse_abstract:info_add(string) end
 
-function game_object:set_task_state(enum_ETaskState, string) end
+function cse_abstract:sight_params() end
 
-function game_object:show_condition(CInifile, string) end
+function cse_abstract:set_sight(enum_SightManager__ESightType, vector, number) end
 
-function game_object:add_sound(string, number, enum_ESoundTypes, number, number, number) end
+function cse_abstract:set_sight(enum_SightManager__ESightType, boolean, boolean) end
 
-function game_object:add_sound(string, number, enum_ESoundTypes, number, number, number, string) end
+function cse_abstract:set_sight(enum_SightManager__ESightType, vector, boolean) end
 
-function game_object:restore_ignore_monster_threshold() end
+function cse_abstract:set_sight(enum_SightManager__ESightType, vector) end
+
+---@param cse_abstract cse_abstract
+function cse_abstract:set_sight(cse_abstract) end
+
+function cse_abstract:set_sight(cse_abstract, boolean) end
+
+function cse_abstract:set_sight(cse_abstract, boolean, boolean) end
+
+function cse_abstract:set_sight(cse_abstract, boolean, boolean, boolean) end
+
+---@param boolean boolean
+function cse_abstract:set_visual_memory_enabled(boolean) end
+
+function cse_abstract:remove_restrictions(string, string) end
+
+function cse_abstract:get_holder_class() end
+
+---@param boolean boolean
+function cse_abstract:disable_hit_marks(boolean) end
+
+function cse_abstract:disable_hit_marks() end
+
+function cse_abstract:location_on_path(number, vector) end
+
+function cse_abstract:sound_prefix() end
+
+---@param string string
+function cse_abstract:sound_prefix(string) end
+
+function cse_abstract:set_task_state(enum_ETaskState, string) end
+
+function cse_abstract:show_condition(CInifile, string) end
+
+function cse_abstract:add_sound(string, number, enum_ESoundTypes, number, number, number) end
+
+function cse_abstract:add_sound(string, number, enum_ESoundTypes, number, number, number, string) end
+
+function cse_abstract:restore_ignore_monster_threshold() end
 
 ---@param number number
-function game_object:set_queue_size(number) end
+function cse_abstract:set_queue_size(number) end
 
----@param game_object game_object
-function game_object:make_object_visible_somewhen(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:make_object_visible_somewhen(cse_abstract) end
 
-function game_object:jump(vector, number) end
+function cse_abstract:jump(vector, number) end
 
-function game_object:restore_weapon() end
+function cse_abstract:restore_weapon() end
 
-function game_object:inv_box_can_take_status() end
-
----@param number number
-function game_object:force_visibility_state(number) end
-
-function game_object:night_vision_enabled() end
-
-function game_object:start_particles(string, string) end
-
----@param boolean boolean
-function game_object:enable_vision(boolean) end
-
-function game_object:vertex_in_direction(number, vector, number) end
-
----@param string string
-function game_object:set_dest_loophole(string) end
-
-function game_object:set_dest_loophole() end
-
-function game_object:detail_path_type() end
-
-function game_object:group_throw_time_interval() end
+function cse_abstract:inv_box_can_take_status() end
 
 ---@param number number
-function game_object:group_throw_time_interval(number) end
+function cse_abstract:force_visibility_state(number) end
 
-function game_object:is_inv_box_empty() end
+function cse_abstract:night_vision_enabled() end
 
-function game_object:target_body_state() end
-
-function game_object:info_clear() end
-
-function game_object:head_orientation() end
-
-function game_object:inside(vector, number) end
-
-function game_object:inside(vector) end
+function cse_abstract:start_particles(string, string) end
 
 ---@param boolean boolean
-function game_object:set_nonscript_usable(boolean) end
+function cse_abstract:enable_vision(boolean) end
 
-function game_object:set_tip_text_default() end
+function cse_abstract:vertex_in_direction(number, vector, number) end
 
 ---@param string string
-function game_object:set_tip_text(string) end
+function cse_abstract:set_dest_loophole(string) end
 
-function game_object:get_current_holder() end
+function cse_abstract:set_dest_loophole() end
+
+function cse_abstract:detail_path_type() end
+
+function cse_abstract:group_throw_time_interval() end
+
+---@param number number
+function cse_abstract:group_throw_time_interval(number) end
+
+function cse_abstract:is_inv_box_empty() end
+
+function cse_abstract:target_body_state() end
+
+function cse_abstract:info_clear() end
+
+function cse_abstract:head_orientation() end
+
+function cse_abstract:inside(vector, number) end
+
+function cse_abstract:inside(vector) end
+
+---@param boolean boolean
+function cse_abstract:set_nonscript_usable(boolean) end
+
+function cse_abstract:set_tip_text_default() end
+
+---@param string string
+function cse_abstract:set_tip_text(string) end
+
+function cse_abstract:get_current_holder() end
 
 ---@return physics_shell
-function game_object:get_physics_shell() end
+function cse_abstract:get_physics_shell() end
 
 ---@param vector vector
 ---@param bskip_collision_correct ?boolean
 ---@param bkeep_speed ?boolean
-function game_object:set_actor_position(vector, bskip_collision_correct, bkeep_speed) end
+function cse_abstract:set_actor_position(vector, bskip_collision_correct, bkeep_speed) end
 
-function game_object:unregister_in_combat() end
+function cse_abstract:unregister_in_combat() end
 
-function game_object:remove_all_restrictions() end
+function cse_abstract:remove_all_restrictions() end
 
-function game_object:get_car() end
+function cse_abstract:get_car() end
 
-function game_object:in_current_loophole_range(vector) end
+function cse_abstract:in_current_loophole_range(vector) end
 
-function game_object:mass() end
+function cse_abstract:mass() end
 
-function game_object:active_sound_count() end
+function cse_abstract:active_sound_count() end
 
 ---@param boolean boolean
-function game_object:active_sound_count(boolean) end
+function cse_abstract:active_sound_count(boolean) end
 
-function game_object:get_anomaly_power() end
+function cse_abstract:get_anomaly_power() end
 
-function game_object:enable_anomaly() end
+function cse_abstract:enable_anomaly() end
 
-function game_object:get_actor_relation_flags() end
+function cse_abstract:get_actor_relation_flags() end
 
 ---@param number number
-function game_object:set_sound_mask(number) end
+function cse_abstract:set_sound_mask(number) end
 
 ---@param string string
-function game_object:community_goodwill(string) end
+function cse_abstract:community_goodwill(string) end
 
-function game_object:vision_enabled() end
+function cse_abstract:vision_enabled() end
 
-function game_object:is_door_locked_for_npc() end
+function cse_abstract:is_door_locked_for_npc() end
 
-function game_object:fake_death_fall_down() end
+function cse_abstract:fake_death_fall_down() end
 
 ---@param number number
-function game_object:ignore_monster_threshold(number) end
+function cse_abstract:ignore_monster_threshold(number) end
 
-function game_object:ignore_monster_threshold() end
+function cse_abstract:ignore_monster_threshold() end
 
-function game_object:target_movement_type() end
+function cse_abstract:target_movement_type() end
 
-function game_object:attachable_item_enabled() end
+function cse_abstract:attachable_item_enabled() end
 
 ---@param boolean boolean
-function game_object:sniper_fire_mode(boolean) end
+function cse_abstract:sniper_fire_mode(boolean) end
 
-function game_object:sniper_fire_mode() end
+function cse_abstract:sniper_fire_mode() end
 
-function game_object:set_smart_cover_target_fire_no_lookout() end
+function cse_abstract:set_smart_cover_target_fire_no_lookout() end
 
-function game_object:on_door_is_open() end
+function cse_abstract:on_door_is_open() end
 
-function game_object:profile_name() end
+function cse_abstract:profile_name() end
 
-function game_object:get_start_dialog() end
+function cse_abstract:get_start_dialog() end
 
 ---@param string string
-function game_object:set_start_dialog(string) end
+function cse_abstract:set_start_dialog(string) end
 
 ---@param string string
-function game_object:set_level_changer_invitation(string) end
+function cse_abstract:set_level_changer_invitation(string) end
 
-function game_object:run_talk_dialog(game_object, boolean) end
-
----@param number number
-function game_object:set_custom_panic_threshold(number) end
-
-function game_object:deadbody_can_take_status() end
-
-function game_object:switch_to_upgrade() end
-
-function game_object:on_door_is_closed() end
+function cse_abstract:run_talk_dialog(cse_abstract, boolean) end
 
 ---@param number number
-function game_object:apply_loophole_direction_distance(number) end
+function cse_abstract:set_custom_panic_threshold(number) end
 
-function game_object:apply_loophole_direction_distance() end
+function cse_abstract:deadbody_can_take_status() end
 
-function game_object:out_restrictions() end
+function cse_abstract:switch_to_upgrade() end
+
+function cse_abstract:on_door_is_closed() end
+
+---@param number number
+function cse_abstract:apply_loophole_direction_distance(number) end
+
+function cse_abstract:apply_loophole_direction_distance() end
+
+function cse_abstract:out_restrictions() end
 
 ---@param boolean boolean
-function game_object:enable_attachable_item(boolean) end
+function cse_abstract:enable_attachable_item(boolean) end
 
 ---@param boolean boolean
-function game_object:disable_show_hide_sounds(boolean) end
+function cse_abstract:disable_show_hide_sounds(boolean) end
 
-function game_object:is_inv_upgrade_enabled() end
+function cse_abstract:is_inv_upgrade_enabled() end
 
-function game_object:set_home(string, number, number, boolean, number) end
+function cse_abstract:set_home(string, number, number, boolean, number) end
 
-function game_object:set_home(number, number, number, boolean, number) end
+function cse_abstract:set_home(number, number, number, boolean, number) end
 
-function game_object:poltergeist_get_actor_ignore() end
+function cse_abstract:poltergeist_get_actor_ignore() end
 
-function game_object:burer_get_force_gravi_attack() end
+function cse_abstract:burer_get_force_gravi_attack() end
 
-function game_object:inv_box_closed(boolean, string) end
+function cse_abstract:inv_box_closed(boolean, string) end
 
-function game_object:set_callback(enum_GameObject__ECallbackType, functor) end
+function cse_abstract:set_callback(enum_GameObject__ECallbackType, functor) end
 
-function game_object:set_callback(enum_GameObject__ECallbackType, functor, object) end
+function cse_abstract:set_callback(enum_GameObject__ECallbackType, functor, object) end
 
 ---@param enum_GameObject__ECallbackType enum_GameObject__ECallbackType
-function game_object:set_callback(enum_GameObject__ECallbackType) end
+function cse_abstract:set_callback(enum_GameObject__ECallbackType) end
 
-function game_object:get_corpse() end
+function cse_abstract:get_corpse() end
 
-function game_object:get_enemy_strength() end
+function cse_abstract:get_enemy_strength() end
 
-function game_object:path_type() end
+function cse_abstract:path_type() end
 
-function game_object:range() end
+function cse_abstract:range() end
 
 ---@param number number
-function game_object:set_anomaly_power(number) end
+function cse_abstract:set_anomaly_power(number) end
 
 ---@param boolean boolean
-function game_object:deadbody_can_take(boolean) end
+function cse_abstract:deadbody_can_take(boolean) end
 
-function game_object:give_talk_message2(string, string, string, string) end
+function cse_abstract:give_talk_message2(string, string, string, string) end
 
 ---@param number number
-function game_object:set_vis_state(number) end
+function cse_abstract:set_vis_state(number) end
 
-function game_object:give_game_news(string, string, string, number, number) end
+function cse_abstract:give_game_news(string, string, string, number, number) end
 
-function game_object:give_game_news(string, string, string, number, number, number) end
+function cse_abstract:give_game_news(string, string, string, number, number, number) end
 
-function game_object:death_time() end
+function cse_abstract:death_time() end
 
-function game_object:get_visibility_state() end
+function cse_abstract:get_visibility_state() end
 
-function game_object:center() end
+function cse_abstract:center() end
 
-function game_object:best_cover(vector, vector, number, number, number) end
+function cse_abstract:best_cover(vector, vector, number, number, number) end
 
-function game_object:accuracy() end
+function cse_abstract:accuracy() end
 
-function game_object:set_desired_position() end
+function cse_abstract:set_desired_position() end
 
 ---@param vector vector
-function game_object:set_desired_position(vector) end
+function cse_abstract:set_desired_position(vector) end
 
 ---@param boolean boolean
-function game_object:poltergeist_set_actor_ignore(boolean) end
+function cse_abstract:poltergeist_set_actor_ignore(boolean) end
 
 ---@param vector vector
-function game_object:accessible(vector) end
+function cse_abstract:accessible(vector) end
 
 ---@param number number
-function game_object:accessible(number) end
+function cse_abstract:accessible(number) end
 
----@param game_object game_object
-function game_object:suitable_smart_cover(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:suitable_smart_cover(cse_abstract) end
 
-function game_object:deadbody_closed_status() end
+function cse_abstract:deadbody_closed_status() end
 
-function game_object:set_patrol_extrapolate_callback() end
+function cse_abstract:set_patrol_extrapolate_callback() end
 
 ---@param functor function
-function game_object:set_patrol_extrapolate_callback(functor) end
+function cse_abstract:set_patrol_extrapolate_callback(functor) end
 
-function game_object:set_patrol_extrapolate_callback(functor, object) end
+function cse_abstract:set_patrol_extrapolate_callback(functor, object) end
 
 ---@param number number
-function game_object:set_range(number) end
+function cse_abstract:set_range(number) end
 
 ---@param string string
-function game_object:attachable_item_load_attach(string) end
+function cse_abstract:attachable_item_load_attach(string) end
 
-function game_object:in_loophole_range(string, string, vector) end
+function cse_abstract:in_loophole_range(string, string, vector) end
 
 ---@param boolean boolean
-function game_object:set_force_anti_aim(boolean) end
+function cse_abstract:set_force_anti_aim(boolean) end
 
 ---@param number number
-function game_object:force_stand_sleep_animation(number) end
+function cse_abstract:force_stand_sleep_animation(number) end
 
-function game_object:add_combat_sound(string, number, enum_ESoundTypes, number, number, number, string) end
+function cse_abstract:add_combat_sound(string, number, enum_ESoundTypes, number, number, number, string) end
 
-function game_object:command(entity_action, boolean) end
+function cse_abstract:command(entity_action, boolean) end
 
 ---@param hit hit
-function game_object:hit(hit) end
+function cse_abstract:hit(hit) end
 
 ---@param boolean boolean
-function game_object:movement_enabled(boolean) end
+function cse_abstract:movement_enabled(boolean) end
 
-function game_object:movement_enabled() end
+function cse_abstract:movement_enabled() end
 
-function game_object:berserk() end
+function cse_abstract:berserk() end
 
-function game_object:accessible_nearest(vector, vector) end
+function cse_abstract:accessible_nearest(vector, vector) end
 
 ---@param enum_MonsterSpace__EMovementType enum_MonsterSpace__EMovementType
-function game_object:set_movement_type(enum_MonsterSpace__EMovementType) end
+function cse_abstract:set_movement_type(enum_MonsterSpace__EMovementType) end
 
-function game_object:group() end
+function cse_abstract:group() end
 
-function game_object:script(boolean, string) end
+function cse_abstract:script(boolean, string) end
 
-function game_object:safe_cover(vector, number, number) end
+function cse_abstract:safe_cover(vector, number, number) end
 
-function game_object:can_script_capture() end
+function cse_abstract:can_script_capture() end
 
-function game_object:base_in_restrictions() end
+function cse_abstract:base_in_restrictions() end
 
 ---@param string string
-function game_object:set_trader_head_anim(string) end
+function cse_abstract:set_trader_head_anim(string) end
 
-function game_object:unregister_door_for_npc() end
-
----@param vector vector
-function game_object:set_npc_position(vector) end
-
-function game_object:movement_target_reached() end
-
-function game_object:set_desired_direction() end
+function cse_abstract:unregister_door_for_npc() end
 
 ---@param vector vector
-function game_object:set_desired_direction(vector) end
+function cse_abstract:set_npc_position(vector) end
 
-function game_object:get_helicopter() end
+function cse_abstract:movement_target_reached() end
 
-function game_object:get_sound_info() end
+function cse_abstract:set_desired_direction() end
 
 ---@param vector vector
-function game_object:find_best_cover(vector) end
+function cse_abstract:set_desired_direction(vector) end
 
-function game_object:register_in_combat() end
+function cse_abstract:get_helicopter() end
+
+function cse_abstract:get_sound_info() end
+
+---@param vector vector
+function cse_abstract:find_best_cover(vector) end
+
+function cse_abstract:register_in_combat() end
 
 ---@param number number
-function game_object:set_sound_threshold(number) end
+function cse_abstract:set_sound_threshold(number) end
 
----@param game_object game_object
-function game_object:memory_position(game_object) end
+---@param cse_abstract cse_abstract
+function cse_abstract:memory_position(cse_abstract) end
 
 ---@param string string
-function game_object:set_visual_name(string) end
+function cse_abstract:set_visual_name(string) end
 
-function game_object:external_sound_stop() end
+function cse_abstract:external_sound_stop() end
 
-function game_object:inv_box_closed_status() end
+function cse_abstract:inv_box_closed_status() end
 
-function game_object:target_mental_state() end
+function cse_abstract:target_mental_state() end
 
 ---@param boolean boolean
-function game_object:set_manual_invisibility(boolean) end
+function cse_abstract:set_manual_invisibility(boolean) end
 
 ---@param number number
-function game_object:action_by_index(number) end
+function cse_abstract:action_by_index(number) end
 
 -- Anomalies objects
-function game_object:get_anomaly_radius() end
+function cse_abstract:get_anomaly_radius() end
 
 ---@param number number
-function game_object:set_anomaly_radius(number) end
+function cse_abstract:set_anomaly_radius(number) end
 
 -- x,y,z
-function game_object:set_anomaly_position(number, number, number) end
+function cse_abstract:set_anomaly_position(number, number, number) end
 
 -- Item objects
-function game_object:condition() end
+function cse_abstract:condition() end
 
 ---@param number number
-function game_object:set_condition(number) end
+function cse_abstract:set_condition(number) end
 
-function game_object:weight() end
+function cse_abstract:weight() end
 
 ---@param number number
-function game_object:set_weight(number) end
+function cse_abstract:set_weight(number) end
 
-function game_object:cost() end
+function cse_abstract:cost() end
 
 -- Weapons/Outfits
 ---@param string string
-function game_object:install_upgrade(string) end
+function cse_abstract:install_upgrade(string) end
 
 ---@param string string
-function game_object:has_upgrade(string) end
+function cse_abstract:has_upgrade(string) end
 
--- function game_object:(string, game_object) - return true to stop iterating
+-- function cse_abstract:(string, cse_abstract) - return true to stop iterating
 ---@param functor function
-function game_object:iterate_installed_upgrades(functor) end
+function cse_abstract:iterate_installed_upgrades(functor) end
 
 -- Outfits
-function game_object:get_additional_max_weight() end
+function cse_abstract:get_additional_max_weight() end
 
 ---@param number number
-function game_object:set_additional_max_weight(number) end
+function cse_abstract:set_additional_max_weight(number) end
 
-function game_object:get_additional_max_walk_weight() end
+function cse_abstract:get_additional_max_walk_weight() end
 
 ---@param number number
-function game_object:set_additional_max_walk_weight(number) end
+function cse_abstract:set_additional_max_walk_weight(number) end
 
 -- Weapons
-function game_object:get_main_weapon_type() end
+function cse_abstract:get_main_weapon_type() end
 
 ---@param number number
-function game_object:set_main_weapon_type(number) end
+function cse_abstract:set_main_weapon_type(number) end
 
-function game_object:get_weapon_type() end
-
----@param number number
-function game_object:set_weapon_type(number) end
-
-function game_object:get_ammo_total() end
-
-function game_object:get_ammo_in_magazine() end
+function cse_abstract:get_weapon_type() end
 
 ---@param number number
-function game_object:set_ammo_elapsed(number) end
+function cse_abstract:set_weapon_type(number) end
+
+function cse_abstract:get_ammo_total() end
+
+function cse_abstract:get_ammo_in_magazine() end
+
+---@param number number
+function cse_abstract:set_ammo_elapsed(number) end
 
 -- (true) to retrieve ammo, otherwise ammo vanish
 ---@param boolean boolean
-function game_object:unload_magazine(boolean) end
+function cse_abstract:unload_magazine(boolean) end
 
 -- (true) to retrieve ammo, otherwise ammo vanish (also works when weapon is jammed)
 ---@param boolean boolean
-function game_object:force_unload_magazine(boolean) end
+function cse_abstract:force_unload_magazine(boolean) end
 
-function game_object:get_ammo_type() end
-
----@param number number
-function game_object:set_ammo_type(number) end
+function cse_abstract:get_ammo_type() end
 
 ---@param number number
-function game_object:has_ammo_type(number) end
-
-function game_object:get_state() end
-
-function game_object:weapon_in_grenade_mode() end
-
-function game_object:get_weapon_substate() end
+function cse_abstract:set_ammo_type(number) end
 
 ---@param number number
-function game_object:switch_state(number) end
+function cse_abstract:has_ammo_type(number) end
 
-function game_object:weapon_is_scope() end
+function cse_abstract:get_state() end
 
-function game_object:weapon_scope_status() end
+function cse_abstract:weapon_in_grenade_mode() end
 
-function game_object:weapon_silencer_status() end
+function cse_abstract:get_weapon_substate() end
 
-function game_object:weapon_grenadelauncher_status() end
+---@param number number
+function cse_abstract:switch_state(number) end
 
-function game_object:weapon_is_silencer() end
+function cse_abstract:weapon_is_scope() end
 
-function game_object:weapon_is_grenadelauncher() end
+function cse_abstract:weapon_scope_status() end
 
----@param game_object game_object
-function game_object:weapon_addon_attach(game_object) end
+function cse_abstract:weapon_silencer_status() end
+
+function cse_abstract:weapon_grenadelauncher_status() end
+
+function cse_abstract:weapon_is_silencer() end
+
+function cse_abstract:weapon_is_grenadelauncher() end
+
+---@param cse_abstract cse_abstract
+function cse_abstract:weapon_addon_attach(cse_abstract) end
 
 ---@param string string
-function game_object:weapon_addon_detach(string) end
+function cse_abstract:weapon_addon_detach(string) end
 
 ---@param number number
-function game_object:set_queue_size(number) end
+function cse_abstract:set_queue_size(number) end
 
 -- Ammo
-function game_object:ammo_get_count() end
+function cse_abstract:ammo_get_count() end
 
 ---@param number number
-function game_object:ammo_set_count(number) end
+function cse_abstract:ammo_set_count(number) end
 
-function game_object:ammo_box_size() end
+function cse_abstract:ammo_box_size() end
 
 -- Multiuse items
-function game_object:get_max_uses() end
+function cse_abstract:get_max_uses() end
 
-function game_object:get_remaining_uses() end
+function cse_abstract:get_remaining_uses() end
 
 ---@param number number
-function game_object:set_remaining_uses(number) end
+function cse_abstract:set_remaining_uses(number) end
 
 -- Devices
-function game_object:power_critical() end
+function cse_abstract:power_critical() end
 
 -- PDA
 -- [0-1]
 ---@param number number
-function game_object:set_psy_factor(number) end
+function cse_abstract:set_psy_factor(number) end
 
-function game_object:psy_factor() end
+function cse_abstract:psy_factor() end
 
 -- Torch
 ---@param boolean boolean
-function game_object:enable_torch(boolean) end
+function cse_abstract:enable_torch(boolean) end
 
-function game_object:torch_enabled() end
+function cse_abstract:torch_enabled() end
 
 -- Class casting. obj:cast_CustomOutfit() allows you to access CCustomOutfit class methods if the object is an outfit
 -- All classes and their methods are listed in this file
 ---@return CActor
-function game_object:cast_Actor() end
+function cse_abstract:cast_Actor() end
 
 ---@return CCar
-function game_object:cast_Car() end
+function cse_abstract:cast_Car() end
 
 ---@return CHelicopter
-function game_object:cast_Heli() end
+function cse_abstract:cast_Heli() end
 
 ---@return CInventoryOwner
-function game_object:cast_InventoryOwner() end
+function cse_abstract:cast_InventoryOwner() end
 
 ---@return CInventoryBox
-function game_object:cast_InventoryBox() end
+function cse_abstract:cast_InventoryBox() end
 
 ---@return CCustomZone
-function game_object:cast_CustomZone() end
+function cse_abstract:cast_CustomZone() end
 
 ---@return CTorridZone
-function game_object:cast_TorridZone() end
+function cse_abstract:cast_TorridZone() end
 
 ---@return CMosquitoBald
-function game_object:cast_MosquitoBald() end
+function cse_abstract:cast_MosquitoBald() end
 
 ---@return CZoneCampfire
-function game_object:cast_ZoneCampfire() end
+function cse_abstract:cast_ZoneCampfire() end
 
 ---@return CInventoryItem
-function game_object:cast_InventoryItem() end
+function cse_abstract:cast_InventoryItem() end
 
 ---@return CCustomOutfit
-function game_object:cast_CustomOutfit() end
+function cse_abstract:cast_CustomOutfit() end
 
 ---@return CHelmet
-function game_object:cast_Helmet() end
+function cse_abstract:cast_Helmet() end
 
 ---@return CArtefact
-function game_object:cast_Artefact() end
+function cse_abstract:cast_Artefact() end
 
 ---@return CWeaponAmmo
-function game_object:cast_Ammo() end
+function cse_abstract:cast_Ammo() end
 
 ---@return CWeapon
-function game_object:cast_Weapon() end
+function cse_abstract:cast_Weapon() end
 
 ---@return CWeaponMagazined
-function game_object:cast_WeaponMagazined() end
+function cse_abstract:cast_WeaponMagazined() end
 
 ---@return CWeaponMagazinedWGrenade
-function game_object:cast_WeaponMagazinedWGrenade() end
+function cse_abstract:cast_WeaponMagazinedWGrenade() end
 
 ---@return CEatableItem
-function game_object:cast_EatableItem() end
+function cse_abstract:cast_EatableItem() end
 
 ---@return CMedkit
-function game_object:cast_Medkit() end
+function cse_abstract:cast_Medkit() end
 
 ---@return CAntirad
-function game_object:cast_Antirad() end
+function cse_abstract:cast_Antirad() end
 
 ---@return CFoodItem
-function game_object:cast_FoodItem() end
+function cse_abstract:cast_FoodItem() end
 
 ---@return CBottleItem
-function game_object:cast_BottleItem() end
+function cse_abstract:cast_BottleItem() end
 
----Returns name of a bone by index in the `game_object`.
+---Returns name of a bone by index in the `cse_abstract`.
 ---@param index? number
----@param bHud? boolean set `true` if `game_object` is a hud item - defaults to false
+---@param bHud? boolean set `true` if `cse_abstract` is a hud item - defaults to false
 ---@return string
-function game_object:bone_name(index, bHud) end
+function cse_abstract:bone_name(index, bHud) end
 
----Returns angle vector of a bone in the `game_object`.
+---Returns angle vector of a bone in the `cse_abstract`.
 ---
 ---Rotations are given in the order: Heading, Pitch, and Bank - that is, YXZ.
 ---So the X and Y components should be swapped if you want to match `se_obj.angle`
 ---
 ---@param bone_name? string defaults to root bone if nil
----@param bHud? boolean set `true` if `game_object` is a hud item - defaults to false
+---@param bHud? boolean set `true` if `cse_abstract` is a hud item - defaults to false
 ---@return vector
-function game_object:bone_direction(bone_name, bHud) end
+function cse_abstract:bone_direction(bone_name, bHud) end
 
 ---@param bone_name? string defaults to root bone if nil
----@param bHud? boolean set `true` if `game_object` is a hud item - defaults to false
+---@param bHud? boolean set `true` if `cse_abstract` is a hud item - defaults to false
 ---@return boolean
-function game_object:bone_visible(bone_name, bHud) end
+function cse_abstract:bone_visible(bone_name, bHud) end
 
 ---@param bone_name string
 ---@param bVisibility boolean
 ---@param bRecursive boolean
 ---@param bHud boolean
-function game_object:set_bone_visible(bone_name, bVisibility, bRecursive, bHud) end
+function cse_abstract:set_bone_visible(bone_name, bVisibility, bRecursive, bHud) end
+
+---@alias game_object cse_abstract
 
 ---@class danger_object
 danger_object = {}
@@ -3121,13 +3128,13 @@ function danger_object:dependent_object(danger_object) end
 
 ---@class cef_storage
 cef_storage = {}
-function cef_storage:evaluate(cef_storage, string, game_object) end
+function cef_storage:evaluate(cef_storage, string, cse_abstract) end
 
-function cef_storage:evaluate(cef_storage, string, game_object, game_object) end
+function cef_storage:evaluate(cef_storage, string, cse_abstract, cse_abstract) end
 
-function cef_storage:evaluate(cef_storage, string, game_object, game_object, game_object) end
+function cef_storage:evaluate(cef_storage, string, cse_abstract, cse_abstract, cse_abstract) end
 
-function cef_storage:evaluate(cef_storage, string, game_object, game_object, game_object, game_object) end
+function cef_storage:evaluate(cef_storage, string, cse_abstract, cse_abstract, cse_abstract, cse_abstract) end
 
 function cef_storage:evaluate(cef_storage, string, cse_alife_object) end
 
@@ -3207,8 +3214,8 @@ function hit:bone(string) end
 ---@overload fun(): move
 -- move (enum_CScriptMovementAction__EInputKeys)
 -- move (enum_CScriptMovementAction__EInputKeys, number)
--- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, game_object)
--- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, game_object, number)
+-- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, cse_abstract)
+-- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, cse_abstract, number)
 -- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, patrol)
 -- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, patrol, number)
 -- move (enum_MonsterSpace__EBodyState, enum_MonsterSpace__EMovementType, enum_DetailPathManager__EDetailPathType, vector)
@@ -3216,15 +3223,15 @@ function hit:bone(string) end
 ---@overload fun(vector, number): move
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, vector)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, patrol)
--- move (enum_MonsterSpace__EScriptMonsterMoveAction, game_object)
+-- move (enum_MonsterSpace__EScriptMonsterMoveAction, cse_abstract)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, vector, number)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, number, vector)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, number, vector, number)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, patrol, number)
--- move (enum_MonsterSpace__EScriptMonsterMoveAction, game_object, number)
+-- move (enum_MonsterSpace__EScriptMonsterMoveAction, cse_abstract, number)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, vector, number, enum_MonsterSpace__EScriptMonsterSpeedParam)
 -- move (enum_MonsterSpace__EScriptMonsterMoveAction, patrol, number, enum_MonsterSpace__EScriptMonsterSpeedParam)
--- move (enum_MonsterSpace__EScriptMonsterMoveAction, game_object, number, enum_MonsterSpace__EScriptMonsterSpeedParam)
+-- move (enum_MonsterSpace__EScriptMonsterMoveAction, cse_abstract, number, enum_MonsterSpace__EScriptMonsterSpeedParam)
 move = {}
 move.back = 4
 move.criteria = 2
@@ -3273,8 +3280,8 @@ function move:input(enum_CScriptMovementAction__EInputKeys) end
 
 function move:patrol(CPatrolPath, shared_str) end
 
----@param game_object game_object
-function move:object(game_object) end
+---@param cse_abstract cse_abstract
+function move:object(cse_abstract) end
 
 ---@param enum_MonsterSpace__EBodyState enum_MonsterSpace__EBodyState
 function move:body(enum_MonsterSpace__EBodyState) end
@@ -3283,10 +3290,10 @@ function move:body(enum_MonsterSpace__EBodyState) end
 ---@overload fun(): look
 -- look (enum_SightManager__ESightType)
 -- look (enum_SightManager__ESightType, vector)
--- look (enum_SightManager__ESightType, game_object)
--- look (enum_SightManager__ESightType, game_object, string)
+-- look (enum_SightManager__ESightType, cse_abstract)
+-- look (enum_SightManager__ESightType, cse_abstract, string)
 ---@overload fun( vector, number, number): look
----@overload fun(game_object, number, number): look
+---@overload fun(cse_abstract, number, number): look
 look = {}
 look.cur_dir = 0
 look.danger = 5
@@ -3301,8 +3308,8 @@ function look:completed() end
 ---@param enum_SightManager__ESightType enum_SightManager__ESightType
 function look:type(enum_SightManager__ESightType) end
 
----@param game_object game_object
-function look:object(game_object) end
+---@param cse_abstract cse_abstract
+function look:object(cse_abstract) end
 
 ---@param string string
 function look:bone(string) end

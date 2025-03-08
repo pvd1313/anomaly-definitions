@@ -1,8 +1,6 @@
 ---@meta
 ---@version 5.1
 
-function wnd() end
-
 ---@return CInifile
 function game_ini() end
 

@@ -95,7 +95,7 @@ function CScriptXmlInit:NodeExist(path, index) end
 ---@param path string
 ---@param index number
 ---@param tag_name string
----@return int
+---@return number
 function CScriptXmlInit:GetNodesNum(path, index, tag_name) end
 
 ---@param path string
@@ -135,6 +135,11 @@ CGameFont.alCenter = 2
 CGameFont.alLeft = 0
 CGameFont.alRight = 1
 
+---@class IPureDestroyableObject
+IPureDestroyableObject = {}
+
+---@class StaticDrawableWrapper : IPureDestroyableObject
+StaticDrawableWrapper = {}
 
 ---@class CUIWindow
 ---@overload fun(): CUIWindow
@@ -282,6 +287,7 @@ function CPhraseDialog:AddPhrase(string, string, string, number) end
 ---@overload fun(): CUIStatic
 CUIStatic = {}
 
+---@return CUILines
 function CUIStatic:TextControl() end
 
 function CUIStatic:GetTextureRect() end
@@ -491,6 +497,8 @@ function CUIFrameWindow:SetWidth(number) end
 ---@class CUIGameCustom
 CUIGameCustom = {}
 
+---@return CUIStatic
+function CUIGameCustom:wnd() end
 function CUIGameCustom:HidePdaMenu() end
 
 function CUIGameCustom:HideActorMenu() end
@@ -504,9 +512,16 @@ function CUIGameCustom:RemoveDialogToRender(CUIWindow) end
 function CUIGameCustom:show_messages() end
 
 ---@param string string
+---@return CUIGameCustom
 function CUIGameCustom:GetCustomStatic(string) end
 
-function CUIGameCustom:AddCustomStatic(string, boolean) end
+---@param id string
+---@param singleInstance? boolean
+---@return self
+function CUIGameCustom:AddCustomStatic(id, singleInstance)
+    self.m_endTime = 0;
+    return self
+end
 
 function CUIGameCustom:hide_messages() end
 

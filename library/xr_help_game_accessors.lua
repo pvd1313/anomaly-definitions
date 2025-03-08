@@ -4,7 +4,7 @@
 game = {}
 
 
----@param string string
+---@param string? string
 ---@return string
 function game.translate_string(string) end
 
@@ -43,7 +43,9 @@ function game.prefetch_texture(string) end
 ---@param string string
 function game.prefetch_model(string) end
 
-function game.actor_lower_weapon() end
+
+---@param status boolean
+function game.actor_lower_weapon(status) end
 
 function game.actor_weapon_lowered() end
 

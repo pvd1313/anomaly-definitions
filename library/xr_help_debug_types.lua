@@ -22,6 +22,7 @@ function CConsole:get_integer(CConsole, string) end
 function CConsole:execute_deferred(CConsole, string) end
 
 ---@param string string
+---@return string token
 function CConsole:get_token(string) end
 
 function CConsole:show() end

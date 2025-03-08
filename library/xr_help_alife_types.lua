@@ -471,13 +471,16 @@ patrol.start = 0
 patrol.stop = 0
 
 ---@param number number
+---@return number
 function patrol:level_vertex_id(number) end
 
+---@return vector
 function patrol:point(patrol, number) end
 
 function patrol:flag(number, number) end
 
 ---@param number number
+---@return number
 function patrol:game_vertex_id(number) end
 
 ---@param number number
@@ -664,6 +667,8 @@ function cse_alife_car:UPDATE_Read(net_packet) end
 ---@overload fun(string): cse_alife_creature_abstract
 cse_alife_creature_abstract = {}
 
+---@return rotation
+function cse_alife_creature_abstract.o_torso() end
 
 ---@param cse_abstract cse_abstract
 function cse_alife_creature_abstract:on_death(cse_abstract) end
@@ -1146,10 +1151,15 @@ function cse_custom_zone:can_save() end
 ---@field online any
 ---@field parent_id any
 ---@field position any
+---@field group_id number
 ---@field script_version any
 ---@overload fun(string): cse_alife_dynamic_object
 cse_alife_dynamic_object = {}
 
+
+---@param float number
+---@return number vector.y
+function cse_abstract:set_yaw(float) end
 
 function cse_alife_dynamic_object:used_ai_locations() end
 
@@ -1347,11 +1357,20 @@ function cse_alife_graph_point:clsid() end
 ---@field script_version any
 ---@field squad any
 ---@field team any
+---@field dist_to_actor number
 ---@overload fun(string): cse_alife_human_abstract
 cse_alife_human_abstract = {}
 
 
 function cse_alife_human_abstract:kill() end
+
+---@param self self
+---@return number
+function cse_alife_human_abstract:commander_id() end
+
+---@param self self
+---@return table
+function cse_alife_human_abstract:squad_members() end
 
 function cse_alife_human_abstract:can_save() end
 
@@ -1376,11 +1395,11 @@ function cse_alife_human_abstract:STATE_Write(net_packet) end
 
 function cse_alife_human_abstract:init() end
 
----@param cse_abstract cse_abstract
-function cse_alife_human_abstract:spawn_ini(cse_abstract) end
+---@param self cse_alife_human_abstract
+function cse_alife_human_abstract:spawn_ini() end
 
----@param cse_abstract cse_abstract
-function cse_alife_human_abstract:section_name(cse_abstract) end
+---@param self cse_alife_human_abstract
+function cse_alife_human_abstract:section_name() end
 
 ---@param cse_alife_trader_abstract cse_alife_trader_abstract
 function cse_alife_human_abstract:profile_name(cse_alife_trader_abstract) end
@@ -1508,9 +1527,6 @@ function cse_alife_human_stalker:can_save() end
 
 ---@param cse_alife_monster_abstract cse_alife_monster_abstract
 function cse_alife_human_stalker:brain(cse_alife_monster_abstract) end
-
----@param cse_alife_human_abstract cse_alife_human_abstract
-function cse_alife_human_stalker:brain(cse_alife_human_abstract) end
 
 function cse_alife_human_stalker:can_switch_online() end
 
@@ -4129,6 +4145,7 @@ function cse_alife_object_projector:UPDATE_Read(net_packet) end
 ---@field online any
 ---@field parent_id any
 ---@field position any
+---@field condition number
 ---@field script_version any
 ---@overload fun(string): cse_alife_object
 cse_alife_object = {}
