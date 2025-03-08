@@ -9,10 +9,8 @@
 		"Lua.workspace.ignoreSubmodules": false,
 		"Lua.diagnostics.disable": [
 			"lowercase-global",
-			"undefined-global",
-			"duplicate-doc-param",
-			"duplicate-doc-alias",
-			"duplicate-doc-field"
+			"local-limit",
+			"undefined-field"
 		],
 		"Lua.runtime.version": "Lua 5.1"
 	},
